@@ -497,7 +497,7 @@ const CONFIG = {
     totalCot:    6,   // Cantidad Total
     totalPagado: 7,   // Pagado
     saldo:       8,   // Saldo por Pagar
-    notas:       1,   // mismo que proveedor, se usa como subtítulo
+    notas:       1,
   },
 
   // ▼ Fila donde empiezan los datos.
@@ -776,21 +776,20 @@ const renderTablas = (rows) => {
   const usdRows = rows.filter(r => getMoneda(r[5]) === 'USD');
 
   const renderRow = (r) => {
-    const nombre   = r[c.nombre]   || '';
-    const prov     = r[c.proveedor]|| '';
-    const estatus  = r[c.estatus]  || '';
-    const total    = parseNum(r[c.totalCot]);
-    const pagado   = parseNum(r[c.totalPagado]);
-    const saldo    = parseNum(r[c.saldo]);
-    const notas    = r[c.notas]    || '';
+    const nombre   = r[0] || '';
+    const prov     = r[1] || '';
+    const estatus  = r[4] || '';
+    const moneda   = r[5] || 'MXN';
+    const total    = parseNum(r[6]);
+    const pagado   = parseNum(r[7]);
+    const saldo    = parseNum(r[8]);
 
-    const colPagado = saldo === 0 ? 'col-paid' : 'col-paid';
-    const colSaldo  = saldo > 0   ? 'col-due'  : 'col-zero';
+    const colSaldo = saldo > 0 ? 'col-due' : 'col-zero';
 
     return `<tr>
       <td>
         <span class="item-name">${nombre}</span>
-        ${notas ? `<span class="item-sub">${notas}</span>` : ''}
+        <span class="item-sub">${prov}</span>
       </td>
       <td style="font-size:10px;color:var(--taupe)">${prov}</td>
       <td>${badgeEstatus(estatus)}</td>
