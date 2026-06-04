@@ -490,23 +490,16 @@ const CONFIG = {
   tcPagado:   "18.21",
 
   // ▼ Índices de columnas en tu Sheet (0 = columna A, 1 = B, etc.)
-  // Ajusta según el orden real de tu Google Sheet
   cols: {
-    nombre:       0,   // Nombre del concepto / cotización
-    proveedor:    1,   // Proveedor / cuenta
-    anticipo:     2,   // Cuenta anticipo
-    estatus:      3,   // Finiquitado / En proceso / Pendiente
-    moneda:       4,   // MXN o USD
-    totalCot:     5,   // Cantidad total cotizada
-    totalPagado:  6,   // Total pagado
-    saldo:        7,   // Saldo por pagar
-    notas:        8,   // Notas adicionales (opcional)
-    fecha:        9,   // Fecha de la estimación (opcional)
-  },
-
-  // ▼ Fila donde empiezan los datos (0-indexed). 0 = primera fila, 1 = segunda, etc.
-  // Si tu Sheet tiene encabezados en la fila 1, pon filaInicio: 1
-  filaInicio: 1,
+  nombre:      0,
+  proveedor:   2,
+  estatus:     4,
+  totalCot:    6,
+  totalPagado: 7,
+  saldo:       8,
+  notas:       1,
+},
+filaInicio: 2,
 
   // ▼ Datos de la estimación actual (los llenas tú manualmente o los pones en el Sheet)
   estimacion: {
@@ -705,7 +698,7 @@ const fmtShort = (n) => {
 
 const parseNum = (s) => {
   if (!s) return 0;
-  const clean = String(s).replace(/[$,\s]/g, '').replace(/MXN|USD/gi,'').trim();
+  const clean = String(s).replace(/[MXNUSDmxnusd$,\s]/g, '').trim();
   return parseFloat(clean) || 0;
 };
 
@@ -758,8 +751,8 @@ const renderEstimacion = (est) => {
 // ── RENDER TABLAS GENERALES ───────────────────────────────────────────────────
 const renderTablas = (rows) => {
   const c = CONFIG.cols;
-  const mxnRows = rows.filter(r => (r[c.moneda]||'').toUpperCase() !== 'USD');
-  const usdRows = rows.filter(r => (r[c.moneda]||'').toUpperCase() === 'USD');
+const mxnRows = rows.filter(r => !String(r[c.totalCot]||'').toUpperCase().includes('USD'));
+const usdRows = rows.filter(r =>  String(r[c.totalCot]||'').toUpperCase().includes('USD'));
 
   const renderRow = (r) => {
     const nombre   = r[c.nombre]   || '';
