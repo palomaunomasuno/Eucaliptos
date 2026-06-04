@@ -768,34 +768,28 @@ const renderEstimacion = (est) => {
 };
 
 // ── RENDER TABLAS GENERALES ───────────────────────────────────────────────────
+// COLUMN MAP (verified from CSV debug):
+// r[0]=nombre, r[1]=proveedor, r[2]='', r[3]='', r[4]=estatus, r[5]=moneda, r[6]=total, r[7]=pagado, r[8]=saldo
 const renderTablas = (rows) => {
-  const c = CONFIG.cols;
   debugRows(rows);
-  // Detect currency from the totalCot cell which contains "MXN $..." or "USD $..."
-  const mxnRows = rows.filter(r => getMoneda(r[5]) === 'MXN');
-  const usdRows = rows.filter(r => getMoneda(r[5]) === 'USD');
+  const mxnRows = rows.filter(r => (r[5]||'').toUpperCase() === 'MXN');
+  const usdRows = rows.filter(r => (r[5]||'').toUpperCase() === 'USD');
 
   const renderRow = (r) => {
-    const nombre   = r[0] || '';
-    const prov     = r[1] || '';
-    const estatus  = r[4] || '';
-    const moneda   = r[5] || 'MXN';
-    const total    = parseNum(r[6]);
-    const pagado   = parseNum(r[7]);
-    const saldo    = parseNum(r[8]);
-
-    const colSaldo = saldo > 0 ? 'col-due' : 'col-zero';
-
+    const nombre = r[0] || '';
+    const prov   = r[1] || '';
+    const estat  = r[4] || '';
+    const total  = parseNum(r[6]);
+    const pagado = parseNum(r[7]);
+    const saldo  = parseNum(r[8]);
+    const colS   = saldo > 0 ? 'col-due' : 'col-zero';
     return `<tr>
-      <td>
-        <span class="item-name">${nombre}</span>
-        <span class="item-sub">${prov}</span>
-      </td>
+      <td><span class="item-name">${nombre}</span><span class="item-sub">${prov}</span></td>
       <td style="font-size:10px;color:var(--taupe)">${prov}</td>
-      <td>${badgeEstatus(estatus)}</td>
+      <td>${badgeEstatus(estat)}</td>
       <td class="right">${total ? fmtShort(total) : '<span class="col-zero">—</span>'}</td>
       <td class="right ${pagado ? 'col-paid' : 'col-zero'}">${pagado ? fmtShort(pagado) : '—'}</td>
-      <td class="right ${colSaldo}">${saldo ? fmtShort(saldo) : '—'}</td>
+      <td class="right ${colS}">${saldo ? fmtShort(saldo) : '—'}</td>
     </tr>`;
   };
 
@@ -803,18 +797,10 @@ const renderTablas = (rows) => {
   document.getElementById('tbody-usd').innerHTML = usdRows.map(renderRow).join('');
 
   const totMXN = { total: 0, pagado: 0, saldo: 0 };
-  mxnRows.forEach(r => {
-    totMXN.total  += parseNum(r[c.totalCot]);
-    totMXN.pagado += parseNum(r[c.totalPagado]);
-    totMXN.saldo  += parseNum(r[c.saldo]);
-  });
+  mxnRows.forEach(r => { totMXN.total += parseNum(r[6]); totMXN.pagado += parseNum(r[7]); totMXN.saldo += parseNum(r[8]); });
 
   const totUSD = { total: 0, pagado: 0, saldo: 0 };
-  usdRows.forEach(r => {
-    totUSD.total  += parseNum(r[c.totalCot]);
-    totUSD.pagado += parseNum(r[c.totalPagado]);
-    totUSD.saldo  += parseNum(r[c.saldo]);
-  });
+  usdRows.forEach(r => { totUSD.total += parseNum(r[6]); totUSD.pagado += parseNum(r[7]); totUSD.saldo += parseNum(r[8]); });
 
   document.getElementById('tfoot-mxn').innerHTML = `
     <td colspan="3" class="totals-label">Total MXN</td>
