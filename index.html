@@ -502,7 +502,7 @@ const CONFIG = {
 
   // ▼ Fila donde empiezan los datos.
   // Tu Sheet tiene 2 filas de encabezado, así que los datos empiezan en fila 3 (índice 2)
-  filaInicio: 2,
+  filaInicio: 15,
 
   // ▼ Datos de la estimación actual (los llenas tú manualmente o los pones en el Sheet)
   estimacion: {
@@ -768,23 +768,28 @@ const renderEstimacion = (est) => {
 };
 
 // ── RENDER TABLAS GENERALES ───────────────────────────────────────────────────
-// COLUMN MAP (verified from CSV debug):
-// r[0]=nombre, r[1]=proveedor, r[2]='', r[3]='', r[4]=estatus, r[5]=moneda, r[6]=total, r[7]=pagado, r[8]=saldo
+// COLUMN MAP (verified from actual CSV download):
+// r[1]=nombre, r[4]=cuenta/proveedor, r[6]=estatus, r[8]=total(con MXN/USD), r[9]=pagado, r[10]=saldo
+// Data starts at row index 15. Rows 38-39 are totals rows (skip them).
 const renderTablas = (rows) => {
-  debugRows(rows);
-  const mxnRows = rows.filter(r => (r[5]||'').toUpperCase() === 'MXN');
-  const usdRows = rows.filter(r => (r[5]||'').toUpperCase() === 'USD');
+  const isData = (r) => r[1] && r[1].trim() && r[6] && r[6].trim() && r[8] && r[8].trim() && r[8] !== 'PENDIENTE' && !r[6].includes('Totales');
+  const isMXN  = (r) => !String(r[8]||'').toUpperCase().startsWith('USD');
+  const isUSD  = (r) => String(r[8]||'').toUpperCase().startsWith('USD');
+
+  const dataRows = rows.filter(isData);
+  const mxnRows  = dataRows.filter(isMXN);
+  const usdRows  = dataRows.filter(isUSD);
 
   const renderRow = (r) => {
-    const nombre = r[0] || '';
-    const prov   = r[1] || '';
-    const estat  = r[4] || '';
-    const total  = parseNum(r[6]);
-    const pagado = parseNum(r[7]);
-    const saldo  = parseNum(r[8]);
+    const nombre = r[1] || '';
+    const prov   = r[4] || '';
+    const estat  = r[6] || '';
+    const total  = parseNum(r[8]);
+    const pagado = parseNum(r[9]);
+    const saldo  = parseNum(r[10]);
     const colS   = saldo > 0 ? 'col-due' : 'col-zero';
     return `<tr>
-      <td><span class="item-name">${nombre}</span><span class="item-sub">${prov}</span></td>
+      <td><span class="item-name">${nombre}</span><span class="item-sub">${r[3]||''}</span></td>
       <td style="font-size:10px;color:var(--taupe)">${prov}</td>
       <td>${badgeEstatus(estat)}</td>
       <td class="right">${total ? fmtShort(total) : '<span class="col-zero">—</span>'}</td>
@@ -797,10 +802,10 @@ const renderTablas = (rows) => {
   document.getElementById('tbody-usd').innerHTML = usdRows.map(renderRow).join('');
 
   const totMXN = { total: 0, pagado: 0, saldo: 0 };
-  mxnRows.forEach(r => { totMXN.total += parseNum(r[6]); totMXN.pagado += parseNum(r[7]); totMXN.saldo += parseNum(r[8]); });
+  mxnRows.forEach(r => { totMXN.total += parseNum(r[8]); totMXN.pagado += parseNum(r[9]); totMXN.saldo += parseNum(r[10]); });
 
   const totUSD = { total: 0, pagado: 0, saldo: 0 };
-  usdRows.forEach(r => { totUSD.total += parseNum(r[6]); totUSD.pagado += parseNum(r[7]); totUSD.saldo += parseNum(r[8]); });
+  usdRows.forEach(r => { totUSD.total += parseNum(r[8]); totUSD.pagado += parseNum(r[9]); totUSD.saldo += parseNum(r[10]); });
 
   document.getElementById('tfoot-mxn').innerHTML = `
     <td colspan="3" class="totals-label">Total MXN</td>
