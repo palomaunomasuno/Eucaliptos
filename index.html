@@ -476,7 +476,7 @@ body {
 <script>
 const CONFIG = {
   // ▼ Pega aquí el link CSV de tu Google Sheet publicado
-  SHEET_CSV_URL: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTfOBIFC4U_k18HKYLN5WtHJcb0qa2p4jBplLrwqFnB1hMreAiC9B6mZ-bdfiRXjA/pub?gid=55926712&single=true&output=csv",
+  SHEET_CSV_URL: "TU_LINK_CSV_AQUI",
 
   // ▼ Información del proyecto (esto no viene del Sheet)
   proyecto: "Eucaliptos",
@@ -491,15 +491,18 @@ const CONFIG = {
 
   // ▼ Índices de columnas en tu Sheet (0 = columna A, 1 = B, etc.)
   cols: {
-  nombre:      0,
-  proveedor:   2,
-  estatus:     4,
-  totalCot:    6,
-  totalPagado: 7,
-  saldo:       8,
-  notas:       1,
-},
-filaInicio: 2,
+    nombre:      0,   // A: Nombre cotización aprobada
+    notas:       1,   // B: Nombre Cot.
+    proveedor:   2,   // C: Cuenta
+    estatus:     4,   // E: Estatus (En proceso / Terminado)
+    totalCot:    6,   // G: Cantidad Total (incluye "MXN" o "USD" en el texto)
+    totalPagado: 7,   // H: Pagado
+    saldo:       8,   // I: Saldo por Pagar
+  },
+
+  // ▼ Fila donde empiezan los datos.
+  // Tu Sheet tiene 2 filas de encabezado, así que los datos empiezan en fila 3 (índice 2)
+  filaInicio: 2,
 
   // ▼ Datos de la estimación actual (los llenas tú manualmente o los pones en el Sheet)
   estimacion: {
@@ -698,8 +701,14 @@ const fmtShort = (n) => {
 
 const parseNum = (s) => {
   if (!s) return 0;
-  const clean = String(s).replace(/[MXNUSDmxnusd$,\s]/g, '').trim();
+  const str = String(s).toUpperCase();
+  const clean = str.replace(/MXN|USD|\$|,|\s/g, '').trim();
   return parseFloat(clean) || 0;
+};
+
+const getMoneda = (s) => {
+  if (!s) return 'MXN';
+  return String(s).toUpperCase().includes('USD') ? 'USD' : 'MXN';
 };
 
 const badgeEstatus = (s) => {
@@ -751,8 +760,8 @@ const renderEstimacion = (est) => {
 // ── RENDER TABLAS GENERALES ───────────────────────────────────────────────────
 const renderTablas = (rows) => {
   const c = CONFIG.cols;
-const mxnRows = rows.filter(r => !String(r[c.totalCot]||'').toUpperCase().includes('USD'));
-const usdRows = rows.filter(r =>  String(r[c.totalCot]||'').toUpperCase().includes('USD'));
+  const mxnRows = rows.filter(r => !String(r[c.totalCot]||'').toUpperCase().includes('USD'));
+  const usdRows = rows.filter(r => String(r[c.totalCot]||'').toUpperCase().includes('USD'));
 
   const renderRow = (r) => {
     const nombre   = r[c.nombre]   || '';
