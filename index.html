@@ -701,14 +701,24 @@ const fmtShort = (n) => {
 
 const parseNum = (s) => {
   if (!s) return 0;
-  const str = String(s).toUpperCase();
-  const clean = str.replace(/MXN|USD|\$|,|\s/g, '').trim();
+  // Strip currency labels, $, commas, spaces, and any quotes
+  const clean = String(s).replace(/MXN|USD/gi, '').replace(/[\$,\s"']/g, '').trim();
   return parseFloat(clean) || 0;
 };
 
 const getMoneda = (s) => {
   if (!s) return 'MXN';
   return String(s).toUpperCase().includes('USD') ? 'USD' : 'MXN';
+};
+
+// Debug helper - logs first few rows to console so you can verify column mapping
+const debugRows = (rows) => {
+  console.log('=== CSV DEBUG: first 3 data rows ===');
+  rows.slice(0, 3).forEach((r, i) => {
+    console.log('Row', i, ':', JSON.stringify(r));
+    console.log('  nombre:', r[0], '| proveedor(C):', r[2], '| estatus(E):', r[4],
+                '| totalCot(G):', r[6], '| pagado(H):', r[7], '| saldo(I):', r[8]);
+  });
 };
 
 const badgeEstatus = (s) => {
@@ -760,8 +770,10 @@ const renderEstimacion = (est) => {
 // ── RENDER TABLAS GENERALES ───────────────────────────────────────────────────
 const renderTablas = (rows) => {
   const c = CONFIG.cols;
-  const mxnRows = rows.filter(r => !String(r[c.totalCot]||'').toUpperCase().includes('USD'));
-  const usdRows = rows.filter(r => String(r[c.totalCot]||'').toUpperCase().includes('USD'));
+  debugRows(rows);
+  // Detect currency from the totalCot cell which contains "MXN $..." or "USD $..."
+  const mxnRows = rows.filter(r => getMoneda(r[c.totalCot]) === 'MXN');
+  const usdRows = rows.filter(r => getMoneda(r[c.totalCot]) === 'USD');
 
   const renderRow = (r) => {
     const nombre   = r[c.nombre]   || '';
@@ -832,17 +844,26 @@ const renderTablas = (rows) => {
 // ── PARSE CSV ─────────────────────────────────────────────────────────────────
 const parseCSV = (text) => {
   const lines = text.trim().split('\n');
-  return lines.slice(CONFIG.filaInicio).map(line => {
+  const parseRow = (line) => {
     const result = [];
     let cur = '', inQ = false;
     for (let i = 0; i < line.length; i++) {
-      if (line[i] === '"') { inQ = !inQ; }
-      else if (line[i] === ',' && !inQ) { result.push(cur.trim()); cur = ''; }
-      else { cur += line[i]; }
+      const ch = line[i];
+      if (ch === '"') {
+        // Handle doubled quotes inside quoted fields
+        if (inQ && line[i+1] === '"') { cur += '"'; i++; }
+        else { inQ = !inQ; }
+      } else if (ch === ',' && !inQ) {
+        result.push(cur.trim());
+        cur = '';
+      } else {
+        cur += ch;
+      }
     }
     result.push(cur.trim());
     return result;
-  }).filter(r => r.some(c => c));
+  };
+  return lines.slice(CONFIG.filaInicio).map(parseRow).filter(r => r.some(c => c));
 };
 
 // ── MAIN LOAD ─────────────────────────────────────────────────────────────────
