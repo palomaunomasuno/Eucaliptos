@@ -491,13 +491,13 @@ const CONFIG = {
 
   // ▼ Índices de columnas en tu Sheet (0 = columna A, 1 = B, etc.)
   cols: {
-    nombre:      1,   // B: Nombre cotización aprobada
-    notas:       2,   // C: Nombre Cot.
-    proveedor:   3,   // D: Cuenta
-    estatus:     5,   // F: Estatus (En proceso / Terminado)
-    totalCot:    7,   // H: Cantidad Total (incluye "MXN" o "USD" en el texto)
-    totalPagado: 8,   // I: Pagado
-    saldo:       9,   // J: Saldo por Pagar
+    nombre:      0,   // Nombre cotización aprobada
+    proveedor:   1,   // Cuenta / Proveedor
+    estatus:     4,   // Estatus (Finiquitado / En proceso)
+    totalCot:    6,   // Cantidad Total
+    totalPagado: 7,   // Pagado
+    saldo:       8,   // Saldo por Pagar
+    notas:       1,   // mismo que proveedor, se usa como subtítulo
   },
 
   // ▼ Fila donde empiezan los datos.
@@ -772,8 +772,8 @@ const renderTablas = (rows) => {
   const c = CONFIG.cols;
   debugRows(rows);
   // Detect currency from the totalCot cell which contains "MXN $..." or "USD $..."
-  const mxnRows = rows.filter(r => getMoneda(r[c.totalCot]) === 'MXN');
-  const usdRows = rows.filter(r => getMoneda(r[c.totalCot]) === 'USD');
+  const mxnRows = rows.filter(r => getMoneda(r[5]) === 'MXN');
+  const usdRows = rows.filter(r => getMoneda(r[5]) === 'USD');
 
   const renderRow = (r) => {
     const nombre   = r[c.nombre]   || '';
