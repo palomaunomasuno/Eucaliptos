@@ -137,6 +137,16 @@ body{font-family:'Montserrat',sans-serif;background:#FAF9F7;color:#3E3E3E;min-he
 .fx-text{font-size:9px;color:#B3A693;font-weight:300;line-height:1.9}
 .footer-brand{font-size:8px;font-weight:500;letter-spacing:.22em;color:#DDD8CC;text-transform:uppercase}
 
+/* ACCORDION */
+.hist-payments{display:none}
+.hist-nopagos{display:none}
+.hist-group.open .hist-payments{display:block}
+.hist-group.open .hist-nopagos{display:block}
+.hist-group-head{cursor:pointer;user-select:none}
+.hg-chevron{font-size:11px;color:#B3A693;margin-left:8px;transition:transform .2s;display:inline-block;flex-shrink:0}
+.hist-group.open .hg-chevron{transform:rotate(180deg)}
+.hist-group-head:hover .hg-nombre{color:#606049}
+
 /* ── MOBILE ── */
 @media(max-width:680px){
   .topbar{padding:10px 16px}
@@ -1049,6 +1059,32 @@ function showTab(id, el) {
   target.classList.add('active');
   el.classList.add('active');
 }
+
+// Accordion
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.hist-group').forEach(group => {
+    const head = group.querySelector('.hist-group-head');
+    const nombre = head.querySelector('.hg-nombre');
+
+    // Add chevron
+    const chev = document.createElement('span');
+    chev.className = 'hg-chevron';
+    chev.textContent = '▾';
+    nombre.parentNode.insertBefore(chev, nombre);
+
+    // Click to toggle
+    head.addEventListener('click', () => {
+      const isOpen = group.classList.contains('open');
+      group.classList.toggle('open', !isOpen);
+    });
+  });
+
+  // Open first group in each section by default
+  document.querySelectorAll('.section, #histMXN, #histUSD').forEach(sec => {
+    const first = sec.querySelector('.hist-group');
+    if (first) first.classList.add('open');
+  });
+});
 </script>
 </body>
 </html>
