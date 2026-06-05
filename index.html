@@ -9,14 +9,12 @@
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Montserrat',sans-serif;background:#FAF9F7;color:#3E3E3E;min-height:100vh}
 
-/* TOPBAR */
 .topbar{background:#3E3E3E;padding:10px 40px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100}
 .topbar-logo{font-size:13px;font-weight:300;letter-spacing:.28em;color:#DDD8CC}
 .topbar-right{font-size:9px;font-weight:500;letter-spacing:.18em;color:#B3A693;text-transform:uppercase;display:flex;align-items:center;gap:8px}
 .dot{width:6px;height:6px;border-radius:50%;background:#606049;animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
 
-/* HERO */
 .hero{background:#606049;padding:32px 40px 26px;display:flex;justify-content:space-between;align-items:flex-end}
 .hero-tag{font-size:8px;font-weight:600;letter-spacing:.28em;color:#DDD8CC;opacity:.65;text-transform:uppercase;margin-bottom:8px}
 .hero-title{font-size:36px;font-weight:200;color:#FAF9F7;letter-spacing:.06em;margin-bottom:5px;line-height:1}
@@ -26,7 +24,6 @@ body{font-family:'Montserrat',sans-serif;background:#FAF9F7;color:#3E3E3E;min-he
 .hero-est-val{font-size:12px;font-weight:300;color:#DDD8CC;letter-spacing:.06em}
 .hero-fecha{font-size:10px;font-weight:300;color:#DDD8CC;opacity:.5;margin-top:3px}
 
-/* SUMMARY CARDS */
 .cards{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid #DDD8CC}
 .card{padding:18px 24px;border-right:.5px solid #DDD8CC;background:#fff}
 .card:last-child{border-right:none}
@@ -38,15 +35,14 @@ body{font-family:'Montserrat',sans-serif;background:#FAF9F7;color:#3E3E3E;min-he
 .card-amount.olive{color:#606049;font-weight:400}
 .card-cur{font-size:9px;color:#B3A693;margin-top:4px;letter-spacing:.1em}
 
-/* PROGRESS */
 .prog-section{padding:14px 40px;background:#fff;border-bottom:.5px solid #EDE9E2;display:flex;align-items:center;gap:20px}
 .prog-label{font-size:8px;font-weight:600;letter-spacing:.18em;color:#B3A693;text-transform:uppercase;white-space:nowrap;min-width:130px}
 .prog-track{flex:1;background:#EDE9E2;border-radius:2px;height:3px}
-.prog-fill{background:#606049;border-radius:2px;height:3px;transition:width 1s ease}
+.prog-fill{background:#606049;border-radius:2px;height:3px}
 .prog-pct{font-size:10px;font-weight:500;color:#606049;white-space:nowrap;min-width:32px;text-align:right}
 
-/* ESTIMACION */
-.est-section{padding:24px 40px}
+/* ESTIMACIÓN */
+.est-section{padding:24px 40px;display:block}
 .est-box{border:1px solid #606049;border-radius:4px;overflow:hidden;max-width:860px}
 .est-head{background:#606049;padding:16px 20px;display:flex;justify-content:space-between;align-items:flex-end}
 .est-num{font-size:9px;font-weight:600;letter-spacing:.22em;color:#DDD8CC;text-transform:uppercase;margin-bottom:4px}
@@ -72,64 +68,115 @@ body{font-family:'Montserrat',sans-serif;background:#FAF9F7;color:#3E3E3E;min-he
 .est-deadline-label{font-size:8px;font-weight:600;letter-spacing:.14em;color:#B3A693;text-transform:uppercase;margin-bottom:2px;text-align:right}
 .est-deadline-val{font-size:11px;font-weight:500;color:#606049;text-align:right}
 
-/* TABS */
 .tabs-wrapper{background:#fff;border-bottom:.5px solid #DDD8CC;padding:0 40px;display:flex;position:sticky;top:42px;z-index:90}
 .tab{font-size:9px;font-weight:600;letter-spacing:.16em;color:#B3A693;text-transform:uppercase;padding:12px 16px;cursor:pointer;border-bottom:2px solid transparent;transition:all .15s;white-space:nowrap}
 .tab:hover{color:#606049}
 .tab.active{color:#606049;border-bottom-color:#606049}
 
-/* SECTIONS */
 .section{padding:24px 40px;display:none}
 .section.active{display:block}
 .section-title{font-size:8px;font-weight:600;letter-spacing:.22em;color:#B3A693;text-transform:uppercase;margin-bottom:16px;padding-bottom:8px;border-bottom:.5px solid #DDD8CC}
 
-/* HISTORIAL TABLE */
+/* HISTORIAL — Flex layout works on all screen sizes */
 .hist-group{margin-bottom:6px;border-radius:4px;overflow:hidden;border:.5px solid #EDE9E2}
-.hist-group-head{background:#fff;padding:13px 16px;display:grid;grid-template-columns:1fr 130px 120px 120px 80px 60px;align-items:center;gap:8px;border-bottom:.5px solid #EDE9E2;border-left:3px solid #606049}
+
+.hist-group-head{
+  background:#fff;padding:14px 16px;
+  display:flex;flex-direction:row;align-items:center;gap:12px;
+  border-bottom:.5px solid #EDE9E2;border-left:3px solid #606049;
+}
 .hist-group-head.liquidado{border-left-color:#3B6D11;background:#FAFFFE}
 .hist-group-head.pendiente{border-left-color:#DDD8CC;background:#FAFAF8}
-.hg-nombre{font-weight:600;font-size:11px;color:#3E3E3E}
+
+.hg-left{flex:1;min-width:0}
+.hg-nombre{font-weight:600;font-size:11px;color:#3E3E3E;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .hg-prov{font-size:9px;color:#B3A693;font-weight:300;margin-top:2px}
-.hg-total{font-size:10px;color:#3E3E3E;text-align:right;font-variant-numeric:tabular-nums}
-.hg-bar-wrap{display:flex;flex-direction:column;gap:3px}
+.hg-nota{font-size:8px;color:#B3A693;font-style:italic;margin-top:3px;line-height:1.4}
+
+.hg-right{display:flex;flex-direction:column;gap:5px;min-width:280px;max-width:340px}
+.hg-top-row{display:flex;justify-content:space-between;align-items:baseline}
+.hg-total-label{font-size:7px;font-weight:600;letter-spacing:.14em;color:#B3A693;text-transform:uppercase}
+.hg-total{font-size:10px;color:#3E3E3E;font-variant-numeric:tabular-nums}
+.hg-bar-wrap{width:100%}
 .hg-bar-track{background:#EDE9E2;border-radius:2px;height:4px;width:100%}
-.hg-bar-fill{background:#606049;border-radius:2px;height:4px;transition:width .8s ease}
+.hg-bar-fill{background:#606049;border-radius:2px;height:4px}
 .hg-bar-fill.done{background:#3B6D11}
-.hg-pagado{font-size:10px;font-weight:600;color:#606049;text-align:right;font-variant-numeric:tabular-nums}
+.hg-bottom-row{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.hg-pagado-wrap,.hg-saldo-wrap{display:flex;flex-direction:column;gap:1px}
+.hg-pagado-label,.hg-saldo-label{font-size:7px;font-weight:600;letter-spacing:.12em;color:#B3A693;text-transform:uppercase}
+.hg-pagado{font-size:12px;font-weight:600;color:#606049;font-variant-numeric:tabular-nums}
 .hg-pagado.done{color:#3B6D11}
-.hg-saldo{font-size:10px;text-align:right;font-variant-numeric:tabular-nums}
+.hg-saldo{font-size:11px;font-variant-numeric:tabular-nums}
 .hg-saldo.due{color:#606049;font-weight:600}
-.hg-saldo.liq{font-size:8px;font-weight:700;color:#3B6D11;background:#EAF3DE;padding:2px 7px;border-radius:2px;text-align:center}
+.hg-saldo.liq{font-size:8px;font-weight:700;color:#3B6D11;background:#EAF3DE;padding:3px 8px;border-radius:2px}
 .hg-saldo.pend{color:#B3A693;font-style:italic;font-size:9px}
-.hg-pct{font-size:10px;font-weight:600;color:#606049;text-align:center}
+.hg-pct{font-size:11px;font-weight:600;color:#606049;white-space:nowrap}
 .hg-pct.done{color:#3B6D11}
 .hg-pct.pend{color:#B3A693}
 
+/* Sub-payments */
 .hist-payments{background:#FAFAF8}
-.hist-payment{display:grid;grid-template-columns:1fr 130px 120px 120px 80px 60px;align-items:center;gap:8px;padding:9px 16px 9px 28px;border-bottom:.5px solid #F0EDE7;font-size:10px}
+.hist-payment{
+  display:flex;justify-content:space-between;align-items:flex-start;
+  padding:9px 16px 9px 22px;
+  border-bottom:.5px solid #F0EDE7;
+}
 .hist-payment:last-child{border-bottom:none}
+.hp-left{display:flex;flex-direction:column;gap:2px;flex:1;min-width:0;padding-right:12px}
 .hp-fecha{color:#B3A693;font-size:9px}
 .hp-est{font-weight:600;color:#606049;font-size:9px}
-.hp-nota{color:#B3A693;font-size:9px;font-style:italic;margin-top:1px}
-.hp-monto{text-align:right;font-weight:500;color:#3E3E3E;font-variant-numeric:tabular-nums}
+.hp-nota{color:#B3A693;font-size:9px;font-style:italic;line-height:1.4}
+.hp-right{display:flex;flex-direction:column;align-items:flex-end;gap:3px;white-space:nowrap}
+.hp-monto{font-size:11px;font-weight:600;color:#3E3E3E;font-variant-numeric:tabular-nums}
 .hp-monto.neg{color:#B3A693}
-.hp-saldo-post{text-align:right;color:#B3A693;font-size:9px;font-variant-numeric:tabular-nums}
+.hp-saldo-post{font-size:9px;color:#B3A693;font-variant-numeric:tabular-nums}
 .hp-saldo-post.liq{color:#3B6D11;font-weight:600;font-size:8px}
-.hist-nopagos{padding:9px 28px;font-size:9px;color:#B3A693;font-style:italic;background:#FAFAF8}
+.hist-nopagos{padding:10px 22px;font-size:9px;color:#B3A693;font-style:italic;background:#FAFAF8}
 
-/* FOOTER */
 .page-footer{padding:14px 40px;border-top:.5px solid #DDD8CC;display:flex;justify-content:space-between;align-items:center;margin-top:8px}
 .fx-text{font-size:9px;color:#B3A693;font-weight:300;line-height:1.9}
 .footer-brand{font-size:8px;font-weight:500;letter-spacing:.22em;color:#DDD8CC;text-transform:uppercase}
 
-@media(max-width:700px){
-  .cards{grid-template-columns:repeat(2,1fr)}
-  .hero{flex-direction:column;gap:14px;align-items:flex-start}
+/* ── MOBILE ── */
+@media(max-width:680px){
+  .topbar{padding:10px 16px}
+  .topbar-logo{font-size:11px;letter-spacing:.2em}
+  .topbar-right{font-size:8px;letter-spacing:.1em}
+  .hero{flex-direction:column;gap:12px;align-items:flex-start;padding:20px 16px 16px}
+  .hero-title{font-size:26px}
   .hero-right{text-align:left}
-  .topbar,.section,.est-section,.prog-section,.page-footer{padding-left:20px;padding-right:20px}
-  .tabs-wrapper{padding:0 20px;overflow-x:auto}
-  .hist-group-head,.hist-payment{grid-template-columns:1fr 90px 90px 80px 50px}
-  .hist-payment:last-child{display:none}
+  .cards{grid-template-columns:repeat(2,1fr)}
+  .card{padding:14px 16px}
+  .card-amount{font-size:16px}
+  .prog-section{padding:12px 16px;gap:10px}
+  .prog-label{min-width:100px;font-size:7px}
+  .tabs-wrapper{padding:0 12px;overflow-x:auto;-webkit-overflow-scrolling:touch;top:38px}
+  .tab{padding:10px 12px;font-size:7px;letter-spacing:.1em}
+  .section{padding:14px 12px}
+  .est-section{padding:14px 12px}
+
+  /* Estimación: stack table as cards */
+  .est-table thead{display:none}
+  .est-table,
+  .est-table tbody,
+  .est-table tr,
+  .est-table td{display:block;width:100%}
+  .est-table tbody tr{padding:12px 14px;border-bottom:.5px solid #EDE9E2}
+  .est-table td{padding:2px 0;border:none}
+  .est-monto{font-size:15px;font-weight:700;margin-top:8px;text-align:left}
+  .est-foot{flex-direction:column;gap:8px;align-items:flex-start}
+  .est-deadline-label,.est-deadline-val{text-align:left}
+  .est-head{flex-direction:column;gap:10px;align-items:flex-start}
+  .est-total{font-size:22px;text-align:left}
+  .est-total-label{text-align:left}
+
+  /* Historial: hg-right goes below hg-left */
+  .hist-group-head{flex-direction:column;align-items:stretch;gap:10px}
+  .hg-nombre{font-size:12px;white-space:normal}
+  .hg-right{min-width:unset;max-width:unset;width:100%}
+
+  .page-footer{padding:12px 16px;flex-direction:column;gap:6px;align-items:flex-start}
+  .footer-brand{align-self:flex-end}
 }
 </style>
 </head>
@@ -154,26 +201,10 @@ body{font-family:'Montserrat',sans-serif;background:#FAF9F7;color:#3E3E3E;min-he
 </div>
 
 <div class="cards">
-  <div class="card">
-    <div class="card-label">Total contratado MXN</div>
-    <div class="card-amount">$17,791,320</div>
-    <div class="card-cur">Pesos mexicanos</div>
-  </div>
-  <div class="card">
-    <div class="card-label">Total pagado MXN</div>
-    <div class="card-amount green">$14,224,582</div>
-    <div class="card-cur">Pesos mexicanos</div>
-  </div>
-  <div class="card hl">
-    <div class="card-label">Saldo pendiente MXN</div>
-    <div class="card-amount olive">$3,531,199</div>
-    <div class="card-cur">Pesos mexicanos</div>
-  </div>
-  <div class="card hl">
-    <div class="card-label">Saldo pendiente USD</div>
-    <div class="card-amount olive">$106,675</div>
-    <div class="card-cur">Dólares americanos</div>
-  </div>
+  <div class="card"><div class="card-label">Total contratado MXN</div><div class="card-amount">$17,791,320</div><div class="card-cur">Pesos mexicanos</div></div>
+  <div class="card"><div class="card-label">Total pagado MXN</div><div class="card-amount green">$14,224,582</div><div class="card-cur">Pesos mexicanos</div></div>
+  <div class="card hl"><div class="card-label">Saldo pendiente MXN</div><div class="card-amount olive">$3,531,199</div><div class="card-cur">Pesos mexicanos</div></div>
+  <div class="card hl"><div class="card-label">Saldo pendiente USD</div><div class="card-amount olive">$106,675</div><div class="card-cur">Dólares americanos</div></div>
 </div>
 
 <div class="prog-section">
@@ -189,65 +220,26 @@ body{font-family:'Montserrat',sans-serif;background:#FAF9F7;color:#3E3E3E;min-he
 </div>
 
 <!-- ESTIMACIÓN -->
-<div id="estimacion" class="est-section" style="display:block">
+<div id="estimacion" class="est-section">
   <div class="est-box">
     <div class="est-head">
-      <div>
-        <div class="est-num">Estimación #14</div>
-        <div class="est-fecha">04 de junio, 2026</div>
-      </div>
-      <div>
-        <div class="est-total-label">Total solicitado</div>
-        <div class="est-total">$960,538 <span class="est-total-cur">MXN</span></div>
-      </div>
+      <div><div class="est-num">Estimación #14</div><div class="est-fecha">04 de junio, 2026</div></div>
+      <div><div class="est-total-label">Total solicitado</div><div class="est-total">$960,538 <span class="est-total-cur">MXN</span></div></div>
     </div>
     <table class="est-table">
       <thead>
-        <tr>
-          <th style="width:28%">Concepto</th>
-          <th style="width:26%">Notas</th>
-          <th style="width:16%">Proveedor</th>
-          <th style="width:10%">Moneda</th>
-          <th class="r" style="width:20%">Monto</th>
-        </tr>
+        <tr><th style="width:26%">Concepto</th><th style="width:28%">Notas</th><th style="width:16%">Proveedor</th><th style="width:10%">Moneda</th><th class="r" style="width:20%">Monto</th></tr>
       </thead>
       <tbody>
-        <tr>
-          <td><span class="est-concept">Interiorismo USD</span></td>
-          <td><span class="est-note">Pago avance pedidos y servicios. TC 18.21</span></td>
-          <td><span class="est-prov">UNO+UNO</span></td>
-          <td><span class="badge-usd">USD</span></td>
-          <td class="est-monto">$1,256<span class="est-cur-sm">USD</span></td>
-        </tr>
-        <tr>
-          <td><span class="est-concept">Electrodomésticos</span></td>
-          <td><span class="est-note">Liquidación equipos electrodomésticos. TC 18.21</span></td>
-          <td><span class="est-prov">ALBERÓ</span></td>
-          <td><span class="badge-usd">USD</span></td>
-          <td class="est-monto">$6,281<span class="est-cur-sm">USD</span></td>
-        </tr>
-        <tr>
-          <td><span class="est-concept">Aditivas Carp.</span></td>
-          <td><span class="est-note">Anticipo cambio de puertas y retiro vestidores recámaras</span></td>
-          <td><span class="est-prov">BLOQUEBE</span></td>
-          <td><span class="badge-mxn">MXN</span></td>
-          <td class="est-monto">$418,852<span class="est-cur-sm">MXN</span></td>
-        </tr>
-        <tr>
-          <td><span class="est-concept">Aditivas Obra</span></td>
-          <td><span class="est-note">Pago avance mantenimiento, cambios de piso, sanitarios japoneses</span></td>
-          <td><span class="est-prov">BLOQUEBE</span></td>
-          <td><span class="badge-mxn">MXN</span></td>
-          <td class="est-monto">$404,420<span class="est-cur-sm">MXN</span></td>
-        </tr>
+        <tr><td><span class="est-concept">Interiorismo USD</span></td><td><span class="est-note">Pago avance pedidos y servicios. TC 18.21</span></td><td><span class="est-prov">UNO+UNO</span></td><td><span class="badge-usd">USD</span></td><td class="est-monto">$1,256 <span class="est-cur-sm">USD</span></td></tr>
+        <tr><td><span class="est-concept">Electrodomésticos</span></td><td><span class="est-note">Liquidación equipos electrodomésticos. TC 18.21</span></td><td><span class="est-prov">ALBERÓ</span></td><td><span class="badge-usd">USD</span></td><td class="est-monto">$6,281 <span class="est-cur-sm">USD</span></td></tr>
+        <tr><td><span class="est-concept">Aditivas Carp.</span></td><td><span class="est-note">Anticipo cambio de puertas y retiro vestidores recámaras</span></td><td><span class="est-prov">BLOQUEBE</span></td><td><span class="badge-mxn">MXN</span></td><td class="est-monto">$418,852 <span class="est-cur-sm">MXN</span></td></tr>
+        <tr><td><span class="est-concept">Aditivas Obra</span></td><td><span class="est-note">Pago avance mantenimiento, cambios de piso, sanitarios japoneses</span></td><td><span class="est-prov">BLOQUEBE</span></td><td><span class="badge-mxn">MXN</span></td><td class="est-monto">$404,420 <span class="est-cur-sm">MXN</span></td></tr>
       </tbody>
     </table>
     <div class="est-foot">
       <div class="est-foot-note">Incluir número de estimación en referencia de transferencia.</div>
-      <div>
-        <div class="est-deadline-label">Fecha límite de pago</div>
-        <div class="est-deadline-val">N/A</div>
-      </div>
+      <div><div class="est-deadline-label">Fecha límite de pago</div><div class="est-deadline-val">N/A</div></div>
     </div>
   </div>
 </div>
@@ -257,326 +249,573 @@ body{font-family:'Montserrat',sans-serif;background:#FAF9F7;color:#3E3E3E;min-he
   <div class="section-title">Pesos mexicanos (MXN)</div>
   <div class="hist-group">
     <div class="hist-group-head liquidado">
-      <div><div class="hg-nombre">DOMA ISLA COCINA</div><div class="hg-prov">DOMA</div></div>
-      <div class="hg-total">$510,936</div>
-      <div class="hg-bar-wrap">
-        <div class="hg-bar-track"><div class="hg-bar-fill done" style="width:100%"></div></div>
+      <div class="hg-left">
+        <div class="hg-nombre">DOMA ISLA COCINA</div>
+        <div class="hg-prov">DOMA</div>
+        
       </div>
-      <div class="hg-pagado done">$510,936</div>
-      <span class="hg-saldo liq">LIQUIDADO</span>
-      <div class="hg-pct done">100%</div>
+      <div class="hg-right">
+        <div class="hg-top-row">
+          <span class="hg-total-label">Contratado</span>
+          <span class="hg-total">$510,936</span>
+        </div>
+        <div class="hg-bar-wrap">
+          <div class="hg-bar-track"><div class="hg-bar-fill done" style="width:100%"></div></div>
+        </div>
+        <div class="hg-bottom-row">
+          <div class="hg-pagado-wrap">
+            <span class="hg-pagado-label">Pagado</span>
+            <span class="hg-pagado done">$510,936</span>
+          </div>
+          <div class="hg-saldo-wrap">
+            <span class="hg-saldo-label">Saldo</span>
+            <span class="hg-saldo liq">LIQUIDADO</span>
+          </div>
+          <span class="hg-pct done">100%</span>
+        </div>
+      </div>
     </div>
     <div class="hist-payments">
       <div class="hist-payment">
-        <div><div class="hp-fecha">↳ &nbsp;11/dic/2025</div><div class="hp-nota">Anticipo mobiliario e instalacion</div></div>
-        <div style="text-align:right"><span class="hp-est">Est. #1</span></div>
-        <div></div>
-        <div class="hp-monto ">$306,562</div>
-        <span class="hp-saldo-post">$204,375</span>
-        <div></div>
+        <div class="hp-left">
+          <span class="hp-fecha">↳ &nbsp;11/dic/2025</span>
+          <span class="hp-est">Est. #1</span>
+          <span class="hp-nota">Anticipo mobiliario e instalacion</span>
+        </div>
+        <div class="hp-right">
+          <span class="hp-monto ">$306,562</span>
+          <span class="hp-saldo-post">$204,375</span>
+        </div>
       </div>
       <div class="hist-payment">
-        <div><div class="hp-fecha">↳ &nbsp;07/abr/2026</div><div class="hp-nota">Finiquito para liberar mobiliario</div></div>
-        <div style="text-align:right"><span class="hp-est">Est. #9</span></div>
-        <div></div>
-        <div class="hp-monto ">$204,375</div>
-        <span class="hp-saldo-post liq">✓ Liquidado</span>
-        <div></div>
+        <div class="hp-left">
+          <span class="hp-fecha">↳ &nbsp;07/abr/2026</span>
+          <span class="hp-est">Est. #9</span>
+          <span class="hp-nota">Finiquito para liberar mobiliario</span>
+        </div>
+        <div class="hp-right">
+          <span class="hp-monto ">$204,375</span>
+          <span class="hp-saldo-post liq">✓ Liquidado</span>
+        </div>
       </div>
     </div>
   </div>
   <div class="hist-group">
     <div class="hist-group-head liquidado">
-      <div><div class="hg-nombre">ÁREA DE ASADOR</div><div class="hg-prov">LIGENT</div></div>
-      <div class="hg-total">$539,833</div>
-      <div class="hg-bar-wrap">
-        <div class="hg-bar-track"><div class="hg-bar-fill done" style="width:93%"></div></div>
+      <div class="hg-left">
+        <div class="hg-nombre">ÁREA DE ASADOR</div>
+        <div class="hg-prov">LIGENT</div>
+        
       </div>
-      <div class="hg-pagado done">$504,294</div>
-      <span class="hg-saldo liq">LIQUIDADO</span>
-      <div class="hg-pct done">93%</div>
+      <div class="hg-right">
+        <div class="hg-top-row">
+          <span class="hg-total-label">Contratado</span>
+          <span class="hg-total">$539,833</span>
+        </div>
+        <div class="hg-bar-wrap">
+          <div class="hg-bar-track"><div class="hg-bar-fill done" style="width:93%"></div></div>
+        </div>
+        <div class="hg-bottom-row">
+          <div class="hg-pagado-wrap">
+            <span class="hg-pagado-label">Pagado</span>
+            <span class="hg-pagado done">$504,294</span>
+          </div>
+          <div class="hg-saldo-wrap">
+            <span class="hg-saldo-label">Saldo</span>
+            <span class="hg-saldo liq">LIQUIDADO</span>
+          </div>
+          <span class="hg-pct done">93%</span>
+        </div>
+      </div>
     </div>
     <div class="hist-payments">
       <div class="hist-payment">
-        <div><div class="hp-fecha">↳ &nbsp;20/nov/2025</div><div class="hp-nota">Anticipo mobiliario, equipos e instalacion</div></div>
-        <div style="text-align:right"><span class="hp-est">Est. #0</span></div>
-        <div></div>
-        <div class="hp-monto ">$431,866</div>
-        <span class="hp-saldo-post">$107,967</span>
-        <div></div>
+        <div class="hp-left">
+          <span class="hp-fecha">↳ &nbsp;20/nov/2025</span>
+          <span class="hp-est">Est. #0</span>
+          <span class="hp-nota">Anticipo mobiliario, equipos e instalacion</span>
+        </div>
+        <div class="hp-right">
+          <span class="hp-monto ">$431,866</span>
+          <span class="hp-saldo-post">$107,967</span>
+        </div>
       </div>
       <div class="hist-payment">
-        <div><div class="hp-fecha">↳ &nbsp;12/may/2026</div><div class="hp-nota">Finiquito instalaciones</div></div>
-        <div style="text-align:right"><span class="hp-est">Est. #4</span></div>
-        <div></div>
-        <div class="hp-monto ">$72,428</div>
-        <span class="hp-saldo-post">$35,539</span>
-        <div></div>
+        <div class="hp-left">
+          <span class="hp-fecha">↳ &nbsp;12/may/2026</span>
+          <span class="hp-est">Est. #4</span>
+          <span class="hp-nota">Finiquito instalaciones</span>
+        </div>
+        <div class="hp-right">
+          <span class="hp-monto ">$72,428</span>
+          <span class="hp-saldo-post">$35,539</span>
+        </div>
       </div>
       <div class="hist-payment">
-        <div><div class="hp-fecha">↳ &nbsp;12/may/2026</div><div class="hp-nota">Deductiva por cancelación de celosía</div></div>
-        <div style="text-align:right"><span class="hp-est">N/A</span></div>
-        <div></div>
-        <div class="hp-monto neg">-$35,539</div>
-        <span class="hp-saldo-post liq">✓ Liquidado</span>
-        <div></div>
+        <div class="hp-left">
+          <span class="hp-fecha">↳ &nbsp;12/may/2026</span>
+          <span class="hp-est">N/A</span>
+          <span class="hp-nota">Deductiva por cancelación de celosía</span>
+        </div>
+        <div class="hp-right">
+          <span class="hp-monto neg">-$35,539</span>
+          <span class="hp-saldo-post liq">✓ Liquidado</span>
+        </div>
       </div>
     </div>
   </div>
   <div class="hist-group">
     <div class="hist-group-head ">
-      <div><div class="hg-nombre">OBRA Y ALBAÑILERÍAS</div><div class="hg-prov">BLOQUEBE</div></div>
-      <div class="hg-total">$8,817,908</div>
-      <div class="hg-bar-wrap">
-        <div class="hg-bar-track"><div class="hg-bar-fill " style="width:91%"></div></div>
+      <div class="hg-left">
+        <div class="hg-nombre">OBRA Y ALBAÑILERÍAS</div>
+        <div class="hg-prov">BLOQUEBE</div>
+        
       </div>
-      <div class="hg-pagado ">$8,021,520</div>
-      <span class="hg-saldo due">$796,388</span>
-      <div class="hg-pct ">91%</div>
+      <div class="hg-right">
+        <div class="hg-top-row">
+          <span class="hg-total-label">Contratado</span>
+          <span class="hg-total">$8,817,908</span>
+        </div>
+        <div class="hg-bar-wrap">
+          <div class="hg-bar-track"><div class="hg-bar-fill " style="width:91%"></div></div>
+        </div>
+        <div class="hg-bottom-row">
+          <div class="hg-pagado-wrap">
+            <span class="hg-pagado-label">Pagado</span>
+            <span class="hg-pagado ">$8,021,520</span>
+          </div>
+          <div class="hg-saldo-wrap">
+            <span class="hg-saldo-label">Saldo</span>
+            <span class="hg-saldo due">$796,388</span>
+          </div>
+          <span class="hg-pct ">91%</span>
+        </div>
+      </div>
     </div>
     <div class="hist-payments">
       <div class="hist-payment">
-        <div><div class="hp-fecha">↳ &nbsp;11/dic/2025</div><div class="hp-nota">Estimación avance de obra</div></div>
-        <div style="text-align:right"><span class="hp-est">Est. #1</span></div>
-        <div></div>
-        <div class="hp-monto ">$2,181,576</div>
-        <span class="hp-saldo-post">$6,636,332</span>
-        <div></div>
+        <div class="hp-left">
+          <span class="hp-fecha">↳ &nbsp;11/dic/2025</span>
+          <span class="hp-est">Est. #1</span>
+          <span class="hp-nota">Estimación avance de obra</span>
+        </div>
+        <div class="hp-right">
+          <span class="hp-monto ">$2,181,576</span>
+          <span class="hp-saldo-post">$6,636,332</span>
+        </div>
       </div>
       <div class="hist-payment">
-        <div><div class="hp-fecha">↳ &nbsp;28/ene/2026</div><div class="hp-nota">Estimación avance de obra</div></div>
-        <div style="text-align:right"><span class="hp-est">Est. #5</span></div>
-        <div></div>
-        <div class="hp-monto ">$1,969,372</div>
-        <span class="hp-saldo-post">$4,666,960</span>
-        <div></div>
+        <div class="hp-left">
+          <span class="hp-fecha">↳ &nbsp;28/ene/2026</span>
+          <span class="hp-est">Est. #5</span>
+          <span class="hp-nota">Estimación avance de obra</span>
+        </div>
+        <div class="hp-right">
+          <span class="hp-monto ">$1,969,372</span>
+          <span class="hp-saldo-post">$4,666,960</span>
+        </div>
       </div>
       <div class="hist-payment">
-        <div><div class="hp-fecha">↳ &nbsp;25/feb/2026</div><div class="hp-nota">Estimación avance de obra</div></div>
-        <div style="text-align:right"><span class="hp-est">Est. #6</span></div>
-        <div></div>
-        <div class="hp-monto ">$1,402,358</div>
-        <span class="hp-saldo-post">$3,264,603</span>
-        <div></div>
+        <div class="hp-left">
+          <span class="hp-fecha">↳ &nbsp;25/feb/2026</span>
+          <span class="hp-est">Est. #6</span>
+          <span class="hp-nota">Estimación avance de obra</span>
+        </div>
+        <div class="hp-right">
+          <span class="hp-monto ">$1,402,358</span>
+          <span class="hp-saldo-post">$3,264,603</span>
+        </div>
       </div>
       <div class="hist-payment">
-        <div><div class="hp-fecha">↳ &nbsp;25/mar/2026</div><div class="hp-nota">Estimación avance de obra</div></div>
-        <div style="text-align:right"><span class="hp-est">Est. #8</span></div>
-        <div></div>
-        <div class="hp-monto ">$1,629,984</div>
-        <span class="hp-saldo-post">$1,634,619</span>
-        <div></div>
+        <div class="hp-left">
+          <span class="hp-fecha">↳ &nbsp;25/mar/2026</span>
+          <span class="hp-est">Est. #8</span>
+          <span class="hp-nota">Estimación avance de obra</span>
+        </div>
+        <div class="hp-right">
+          <span class="hp-monto ">$1,629,984</span>
+          <span class="hp-saldo-post">$1,634,619</span>
+        </div>
       </div>
       <div class="hist-payment">
-        <div><div class="hp-fecha">↳ &nbsp;22/abr/2026</div><div class="hp-nota">Estimación avance de obra</div></div>
-        <div style="text-align:right"><span class="hp-est">Est. #10</span></div>
-        <div></div>
-        <div class="hp-monto ">$838,231</div>
-        <span class="hp-saldo-post">$796,388</span>
-        <div></div>
+        <div class="hp-left">
+          <span class="hp-fecha">↳ &nbsp;22/abr/2026</span>
+          <span class="hp-est">Est. #10</span>
+          <span class="hp-nota">Estimación avance de obra</span>
+        </div>
+        <div class="hp-right">
+          <span class="hp-monto ">$838,231</span>
+          <span class="hp-saldo-post">$796,388</span>
+        </div>
       </div>
     </div>
   </div>
   <div class="hist-group">
     <div class="hist-group-head ">
-      <div><div class="hg-nombre">INTERIORISMO MXN</div><div class="hg-prov">UNO+UNO</div></div>
-      <div class="hg-total">$2,922,545</div>
-      <div class="hg-bar-wrap">
-        <div class="hg-bar-track"><div class="hg-bar-fill " style="width:92%"></div></div>
+      <div class="hg-left">
+        <div class="hg-nombre">INTERIORISMO MXN</div>
+        <div class="hg-prov">UNO+UNO</div>
+        
       </div>
-      <div class="hg-pagado ">$2,686,530</div>
-      <span class="hg-saldo due">$236,015</span>
-      <div class="hg-pct ">92%</div>
+      <div class="hg-right">
+        <div class="hg-top-row">
+          <span class="hg-total-label">Contratado</span>
+          <span class="hg-total">$2,922,545</span>
+        </div>
+        <div class="hg-bar-wrap">
+          <div class="hg-bar-track"><div class="hg-bar-fill " style="width:92%"></div></div>
+        </div>
+        <div class="hg-bottom-row">
+          <div class="hg-pagado-wrap">
+            <span class="hg-pagado-label">Pagado</span>
+            <span class="hg-pagado ">$2,686,530</span>
+          </div>
+          <div class="hg-saldo-wrap">
+            <span class="hg-saldo-label">Saldo</span>
+            <span class="hg-saldo due">$236,015</span>
+          </div>
+          <span class="hg-pct ">92%</span>
+        </div>
+      </div>
     </div>
     <div class="hist-payments">
       <div class="hist-payment">
-        <div><div class="hp-fecha">↳ &nbsp;11/dic/2025</div><div class="hp-nota">Anticipo pedidos y servicios interiorismo</div></div>
-        <div style="text-align:right"><span class="hp-est">Est. #1</span></div>
-        <div></div>
-        <div class="hp-monto ">$2,208,239</div>
-        <span class="hp-saldo-post">$714,306</span>
-        <div></div>
+        <div class="hp-left">
+          <span class="hp-fecha">↳ &nbsp;11/dic/2025</span>
+          <span class="hp-est">Est. #1</span>
+          <span class="hp-nota">Anticipo pedidos y servicios interiorismo</span>
+        </div>
+        <div class="hp-right">
+          <span class="hp-monto ">$2,208,239</span>
+          <span class="hp-saldo-post">$714,306</span>
+        </div>
       </div>
       <div class="hist-payment">
-        <div><div class="hp-fecha">↳ &nbsp;05/ene/2026</div><div class="hp-nota">Finiquito entrega duelas</div></div>
-        <div style="text-align:right"><span class="hp-est">Est. #2</span></div>
-        <div></div>
-        <div class="hp-monto ">$108,054</div>
-        <span class="hp-saldo-post">$606,251</span>
-        <div></div>
+        <div class="hp-left">
+          <span class="hp-fecha">↳ &nbsp;05/ene/2026</span>
+          <span class="hp-est">Est. #2</span>
+          <span class="hp-nota">Finiquito entrega duelas</span>
+        </div>
+        <div class="hp-right">
+          <span class="hp-monto ">$108,054</span>
+          <span class="hp-saldo-post">$606,251</span>
+        </div>
       </div>
       <div class="hist-payment">
-        <div><div class="hp-fecha">↳ &nbsp;14/ene/2026</div><div class="hp-nota">Finiquito entrega azulejos lavandería</div></div>
-        <div style="text-align:right"><span class="hp-est">Est. #4</span></div>
-        <div></div>
-        <div class="hp-monto ">$37,027</div>
-        <span class="hp-saldo-post">$569,224</span>
-        <div></div>
+        <div class="hp-left">
+          <span class="hp-fecha">↳ &nbsp;14/ene/2026</span>
+          <span class="hp-est">Est. #4</span>
+          <span class="hp-nota">Finiquito entrega azulejos lavandería</span>
+        </div>
+        <div class="hp-right">
+          <span class="hp-monto ">$37,027</span>
+          <span class="hp-saldo-post">$569,224</span>
+        </div>
       </div>
       <div class="hist-payment">
-        <div><div class="hp-fecha">↳ &nbsp;17/feb/2026</div><div class="hp-nota">Finiquito telas recámara secundaria y cine</div></div>
-        <div style="text-align:right"><span class="hp-est">Est. #6</span></div>
-        <div></div>
-        <div class="hp-monto ">$3,211</div>
-        <span class="hp-saldo-post">$566,013</span>
-        <div></div>
+        <div class="hp-left">
+          <span class="hp-fecha">↳ &nbsp;17/feb/2026</span>
+          <span class="hp-est">Est. #6</span>
+          <span class="hp-nota">Finiquito telas recámara secundaria y cine</span>
+        </div>
+        <div class="hp-right">
+          <span class="hp-monto ">$3,211</span>
+          <span class="hp-saldo-post">$566,013</span>
+        </div>
       </div>
       <div class="hist-payment">
-        <div><div class="hp-fecha">↳ &nbsp;05/may/2026</div><div class="hp-nota">Finiquito cortinas, persianas y mobiliario bar</div></div>
-        <div style="text-align:right"><span class="hp-est">Est. #11</span></div>
-        <div></div>
-        <div class="hp-monto ">$270,938</div>
-        <span class="hp-saldo-post">$295,076</span>
-        <div></div>
+        <div class="hp-left">
+          <span class="hp-fecha">↳ &nbsp;05/may/2026</span>
+          <span class="hp-est">Est. #11</span>
+          <span class="hp-nota">Finiquito cortinas, persianas y mobiliario bar</span>
+        </div>
+        <div class="hp-right">
+          <span class="hp-monto ">$270,938</span>
+          <span class="hp-saldo-post">$295,076</span>
+        </div>
       </div>
       <div class="hist-payment">
-        <div><div class="hp-fecha">↳ &nbsp;26/may/2026</div><div class="hp-nota">Finiquito tapiz recámara secundaria</div></div>
-        <div style="text-align:right"><span class="hp-est">Est. #12</span></div>
-        <div></div>
-        <div class="hp-monto ">$11,645</div>
-        <span class="hp-saldo-post">$283,431</span>
-        <div></div>
+        <div class="hp-left">
+          <span class="hp-fecha">↳ &nbsp;26/may/2026</span>
+          <span class="hp-est">Est. #12</span>
+          <span class="hp-nota">Finiquito tapiz recámara secundaria</span>
+        </div>
+        <div class="hp-right">
+          <span class="hp-monto ">$11,645</span>
+          <span class="hp-saldo-post">$283,431</span>
+        </div>
       </div>
       <div class="hist-payment">
-        <div><div class="hp-fecha">↳ &nbsp;26/may/2026</div><div class="hp-nota">Finiquito piedra barra bar exterior</div></div>
-        <div style="text-align:right"><span class="hp-est">Est. #13</span></div>
-        <div></div>
-        <div class="hp-monto ">$47,416</div>
-        <span class="hp-saldo-post">$236,015</span>
-        <div></div>
+        <div class="hp-left">
+          <span class="hp-fecha">↳ &nbsp;26/may/2026</span>
+          <span class="hp-est">Est. #13</span>
+          <span class="hp-nota">Finiquito piedra barra bar exterior</span>
+        </div>
+        <div class="hp-right">
+          <span class="hp-monto ">$47,416</span>
+          <span class="hp-saldo-post">$236,015</span>
+        </div>
       </div>
     </div>
   </div>
   <div class="hist-group">
     <div class="hist-group-head liquidado">
-      <div><div class="hg-nombre">SANITARIOS JAP.</div><div class="hg-prov">GILSA</div></div>
-      <div class="hg-total">$497,154</div>
-      <div class="hg-bar-wrap">
-        <div class="hg-bar-track"><div class="hg-bar-fill done" style="width:100%"></div></div>
+      <div class="hg-left">
+        <div class="hg-nombre">SANITARIOS JAP.</div>
+        <div class="hg-prov">GILSA</div>
+        
       </div>
-      <div class="hg-pagado done">$497,154</div>
-      <span class="hg-saldo liq">LIQUIDADO</span>
-      <div class="hg-pct done">100%</div>
+      <div class="hg-right">
+        <div class="hg-top-row">
+          <span class="hg-total-label">Contratado</span>
+          <span class="hg-total">$497,154</span>
+        </div>
+        <div class="hg-bar-wrap">
+          <div class="hg-bar-track"><div class="hg-bar-fill done" style="width:100%"></div></div>
+        </div>
+        <div class="hg-bottom-row">
+          <div class="hg-pagado-wrap">
+            <span class="hg-pagado-label">Pagado</span>
+            <span class="hg-pagado done">$497,154</span>
+          </div>
+          <div class="hg-saldo-wrap">
+            <span class="hg-saldo-label">Saldo</span>
+            <span class="hg-saldo liq">LIQUIDADO</span>
+          </div>
+          <span class="hg-pct done">100%</span>
+        </div>
+      </div>
     </div>
     <div class="hist-payments">
       <div class="hist-payment">
-        <div><div class="hp-fecha">↳ &nbsp;09/mar/2026</div><div class="hp-nota">Pago total del pedido</div></div>
-        <div style="text-align:right"><span class="hp-est">Est. #7</span></div>
-        <div></div>
-        <div class="hp-monto ">$429,828</div>
-        <span class="hp-saldo-post">$67,326</span>
-        <div></div>
+        <div class="hp-left">
+          <span class="hp-fecha">↳ &nbsp;09/mar/2026</span>
+          <span class="hp-est">Est. #7</span>
+          <span class="hp-nota">Pago total del pedido</span>
+        </div>
+        <div class="hp-right">
+          <span class="hp-monto ">$429,828</span>
+          <span class="hp-saldo-post">$67,326</span>
+        </div>
       </div>
       <div class="hist-payment">
-        <div><div class="hp-fecha">↳ &nbsp;09/mar/2026</div><div class="hp-nota">Pago total del pedido</div></div>
-        <div style="text-align:right"><span class="hp-est">Est. #7</span></div>
-        <div></div>
-        <div class="hp-monto ">$67,326</div>
-        <span class="hp-saldo-post liq">✓ Liquidado</span>
-        <div></div>
+        <div class="hp-left">
+          <span class="hp-fecha">↳ &nbsp;09/mar/2026</span>
+          <span class="hp-est">Est. #7</span>
+          <span class="hp-nota">Pago total del pedido</span>
+        </div>
+        <div class="hp-right">
+          <span class="hp-monto ">$67,326</span>
+          <span class="hp-saldo-post liq">✓ Liquidado</span>
+        </div>
       </div>
     </div>
   </div>
   <div class="hist-group">
     <div class="hist-group-head liquidado">
-      <div><div class="hg-nombre">ADITIVAS MATERIAL</div><div class="hg-prov">UNO+UNO</div></div>
-      <div class="hg-total">$23,579</div>
-      <div class="hg-bar-wrap">
-        <div class="hg-bar-track"><div class="hg-bar-fill done" style="width:100%"></div></div>
+      <div class="hg-left">
+        <div class="hg-nombre">ADITIVAS MATERIAL</div>
+        <div class="hg-prov">UNO+UNO</div>
+        
       </div>
-      <div class="hg-pagado done">$23,579</div>
-      <span class="hg-saldo liq">LIQUIDADO</span>
-      <div class="hg-pct done">100%</div>
+      <div class="hg-right">
+        <div class="hg-top-row">
+          <span class="hg-total-label">Contratado</span>
+          <span class="hg-total">$23,579</span>
+        </div>
+        <div class="hg-bar-wrap">
+          <div class="hg-bar-track"><div class="hg-bar-fill done" style="width:100%"></div></div>
+        </div>
+        <div class="hg-bottom-row">
+          <div class="hg-pagado-wrap">
+            <span class="hg-pagado-label">Pagado</span>
+            <span class="hg-pagado done">$23,579</span>
+          </div>
+          <div class="hg-saldo-wrap">
+            <span class="hg-saldo-label">Saldo</span>
+            <span class="hg-saldo liq">LIQUIDADO</span>
+          </div>
+          <span class="hg-pct done">100%</span>
+        </div>
+      </div>
     </div>
     <div class="hist-payments">
       <div class="hist-payment">
-        <div><div class="hp-fecha">↳ &nbsp;17/feb/2026</div><div class="hp-nota">Material faltante para cine y lavandería</div></div>
-        <div style="text-align:right"><span class="hp-est">Est. #6</span></div>
-        <div></div>
-        <div class="hp-monto ">$23,579</div>
-        <span class="hp-saldo-post liq">✓ Liquidado</span>
-        <div></div>
+        <div class="hp-left">
+          <span class="hp-fecha">↳ &nbsp;17/feb/2026</span>
+          <span class="hp-est">Est. #6</span>
+          <span class="hp-nota">Material faltante para cine y lavandería</span>
+        </div>
+        <div class="hp-right">
+          <span class="hp-monto ">$23,579</span>
+          <span class="hp-saldo-post liq">✓ Liquidado</span>
+        </div>
       </div>
     </div>
   </div>
   <div class="hist-group">
     <div class="hist-group-head ">
-      <div><div class="hg-nombre">CLOSETS RECÁMARAS</div><div class="hg-prov">DOMA</div></div>
-      <div class="hg-total">$3,300,949</div>
-      <div class="hg-bar-wrap">
-        <div class="hg-bar-track"><div class="hg-bar-fill " style="width:60%"></div></div>
+      <div class="hg-left">
+        <div class="hg-nombre">CLOSETS RECÁMARAS</div>
+        <div class="hg-prov">DOMA</div>
+        
       </div>
-      <div class="hg-pagado ">$1,980,569</div>
-      <span class="hg-saldo due">$1,320,379</span>
-      <div class="hg-pct ">60%</div>
+      <div class="hg-right">
+        <div class="hg-top-row">
+          <span class="hg-total-label">Contratado</span>
+          <span class="hg-total">$3,300,949</span>
+        </div>
+        <div class="hg-bar-wrap">
+          <div class="hg-bar-track"><div class="hg-bar-fill " style="width:60%"></div></div>
+        </div>
+        <div class="hg-bottom-row">
+          <div class="hg-pagado-wrap">
+            <span class="hg-pagado-label">Pagado</span>
+            <span class="hg-pagado ">$1,980,569</span>
+          </div>
+          <div class="hg-saldo-wrap">
+            <span class="hg-saldo-label">Saldo</span>
+            <span class="hg-saldo due">$1,320,379</span>
+          </div>
+          <span class="hg-pct ">60%</span>
+        </div>
+      </div>
     </div>
     <div class="hist-payments">
       <div class="hist-payment">
-        <div><div class="hp-fecha">↳ &nbsp;22/abr/2026</div><div class="hp-nota">Anticipo mobiliario e instalaciones</div></div>
-        <div style="text-align:right"><span class="hp-est">Est. #10</span></div>
-        <div></div>
-        <div class="hp-monto ">$1,980,569</div>
-        <span class="hp-saldo-post">$1,320,379</span>
-        <div></div>
+        <div class="hp-left">
+          <span class="hp-fecha">↳ &nbsp;22/abr/2026</span>
+          <span class="hp-est">Est. #10</span>
+          <span class="hp-nota">Anticipo mobiliario e instalaciones</span>
+        </div>
+        <div class="hp-right">
+          <span class="hp-monto ">$1,980,569</span>
+          <span class="hp-saldo-post">$1,320,379</span>
+        </div>
       </div>
     </div>
   </div>
   <div class="hist-group">
     <div class="hist-group-head ">
-      <div><div class="hg-nombre">ADITIVAS OBRA</div><div class="hg-prov">BLOQUEBE</div><div style="font-size:8px;color:#B3A693;font-style:italic;margin-top:2px">Mantenimiento y cambios pisos de mármol, instalaciones baños japoneses, estancia PA</div></div>
-      <div class="hg-total">$597,953</div>
-      <div class="hg-bar-wrap">
-        <div class="hg-bar-track"><div class="hg-bar-fill " style="width:0%"></div></div>
+      <div class="hg-left">
+        <div class="hg-nombre">ADITIVAS OBRA</div>
+        <div class="hg-prov">BLOQUEBE</div>
+        <div class="hg-nota">Mantenimiento y cambios pisos de mármol, instalaciones baños japoneses, estancia PA</div>
       </div>
-      <div class="hg-pagado ">—</div>
-      <span class="hg-saldo due">$597,953</span>
-      <div class="hg-pct ">0%</div>
+      <div class="hg-right">
+        <div class="hg-top-row">
+          <span class="hg-total-label">Contratado</span>
+          <span class="hg-total">$597,953</span>
+        </div>
+        <div class="hg-bar-wrap">
+          <div class="hg-bar-track"><div class="hg-bar-fill " style="width:0%"></div></div>
+        </div>
+        <div class="hg-bottom-row">
+          <div class="hg-pagado-wrap">
+            <span class="hg-pagado-label">Pagado</span>
+            <span class="hg-pagado ">—</span>
+          </div>
+          <div class="hg-saldo-wrap">
+            <span class="hg-saldo-label">Saldo</span>
+            <span class="hg-saldo due">$597,953</span>
+          </div>
+          <span class="hg-pct ">0%</span>
+        </div>
+      </div>
     </div>
     <div class="hist-nopagos">Sin pagos registrados — pendiente de iniciar</div>
   </div>
   <div class="hist-group">
     <div class="hist-group-head ">
-      <div><div class="hg-nombre">ADITIVAS CARP.</div><div class="hg-prov">BLOQUEBE</div><div style="font-size:8px;color:#B3A693;font-style:italic;margin-top:2px">Cambios de puertas, desmontajes de closets</div></div>
-      <div class="hg-total">$580,464</div>
-      <div class="hg-bar-wrap">
-        <div class="hg-bar-track"><div class="hg-bar-fill " style="width:0%"></div></div>
+      <div class="hg-left">
+        <div class="hg-nombre">ADITIVAS CARP.</div>
+        <div class="hg-prov">BLOQUEBE</div>
+        <div class="hg-nota">Cambios de puertas, desmontajes de closets</div>
       </div>
-      <div class="hg-pagado ">—</div>
-      <span class="hg-saldo due">$580,464</span>
-      <div class="hg-pct ">0%</div>
+      <div class="hg-right">
+        <div class="hg-top-row">
+          <span class="hg-total-label">Contratado</span>
+          <span class="hg-total">$580,464</span>
+        </div>
+        <div class="hg-bar-wrap">
+          <div class="hg-bar-track"><div class="hg-bar-fill " style="width:0%"></div></div>
+        </div>
+        <div class="hg-bottom-row">
+          <div class="hg-pagado-wrap">
+            <span class="hg-pagado-label">Pagado</span>
+            <span class="hg-pagado ">—</span>
+          </div>
+          <div class="hg-saldo-wrap">
+            <span class="hg-saldo-label">Saldo</span>
+            <span class="hg-saldo due">$580,464</span>
+          </div>
+          <span class="hg-pct ">0%</span>
+        </div>
+      </div>
     </div>
     <div class="hist-nopagos">Sin pagos registrados — pendiente de iniciar</div>
   </div>
   <div class="hist-group">
     <div class="hist-group-head pendiente">
-      <div><div class="hg-nombre">ADITIVAS PENDIENTES</div><div class="hg-prov">BLOQUEBE</div><div style="font-size:8px;color:#B3A693;font-style:italic;margin-top:2px">Ejecución Spa, Escoltas, Gimnasio — Pendiente de definir</div></div>
-      <div class="hg-total">—</div>
-      <div class="hg-bar-wrap">
-        <div class="hg-bar-track"><div class="hg-bar-fill " style="width:0%"></div></div>
+      <div class="hg-left">
+        <div class="hg-nombre">ADITIVAS PENDIENTES</div>
+        <div class="hg-prov">BLOQUEBE</div>
+        <div class="hg-nota">Ejecución Spa, Escoltas, Gimnasio — Pendiente de definir</div>
       </div>
-      <div class="hg-pagado ">—</div>
-      <span class="hg-saldo pend">Pendiente</span>
-      <div class="hg-pct pend">0%</div>
+      <div class="hg-right">
+        <div class="hg-top-row">
+          <span class="hg-total-label">Contratado</span>
+          <span class="hg-total">—</span>
+        </div>
+        <div class="hg-bar-wrap">
+          <div class="hg-bar-track"><div class="hg-bar-fill " style="width:0%"></div></div>
+        </div>
+        <div class="hg-bottom-row">
+          <div class="hg-pagado-wrap">
+            <span class="hg-pagado-label">Pagado</span>
+            <span class="hg-pagado ">—</span>
+          </div>
+          <div class="hg-saldo-wrap">
+            <span class="hg-saldo-label">Saldo</span>
+            <span class="hg-saldo pend">Pendiente</span>
+          </div>
+          <span class="hg-pct pend">0%</span>
+        </div>
+      </div>
     </div>
     <div class="hist-nopagos">Sin pagos registrados — pendiente de iniciar</div>
   </div>
   <div class="hist-group">
     <div class="hist-group-head pendiente">
-      <div><div class="hg-nombre">IMPORTACIÓN MXN</div><div class="hg-prov">COMERCIALIZADORA</div><div style="font-size:8px;color:#B3A693;font-style:italic;margin-top:2px">Pendiente de definir</div></div>
-      <div class="hg-total">—</div>
-      <div class="hg-bar-wrap">
-        <div class="hg-bar-track"><div class="hg-bar-fill " style="width:0%"></div></div>
+      <div class="hg-left">
+        <div class="hg-nombre">IMPORTACIÓN MXN</div>
+        <div class="hg-prov">COMERCIALIZADORA</div>
+        <div class="hg-nota">Pendiente de definir</div>
       </div>
-      <div class="hg-pagado ">—</div>
-      <span class="hg-saldo pend">Pendiente</span>
-      <div class="hg-pct pend">0%</div>
+      <div class="hg-right">
+        <div class="hg-top-row">
+          <span class="hg-total-label">Contratado</span>
+          <span class="hg-total">—</span>
+        </div>
+        <div class="hg-bar-wrap">
+          <div class="hg-bar-track"><div class="hg-bar-fill " style="width:0%"></div></div>
+        </div>
+        <div class="hg-bottom-row">
+          <div class="hg-pagado-wrap">
+            <span class="hg-pagado-label">Pagado</span>
+            <span class="hg-pagado ">—</span>
+          </div>
+          <div class="hg-saldo-wrap">
+            <span class="hg-saldo-label">Saldo</span>
+            <span class="hg-saldo pend">Pendiente</span>
+          </div>
+          <span class="hg-pct pend">0%</span>
+        </div>
+      </div>
     </div>
     <div class="hist-nopagos">Sin pagos registrados — pendiente de iniciar</div>
   </div>
 
-  <div class="page-footer" style="padding:14px 0 0;margin-top:16px">
-    <div class="fx-text">TC aplicado: MXN $18.55 / USD &nbsp;·&nbsp; TC pagado: MXN $18.21 / USD</div>
-  </div>
 </div>
 
 <!-- HISTORIAL USD -->
@@ -584,317 +823,225 @@ body{font-family:'Montserrat',sans-serif;background:#FAF9F7;color:#3E3E3E;min-he
   <div class="section-title">Dólares americanos (USD)</div>
   <div class="hist-group">
     <div class="hist-group-head liquidado">
-      <div><div class="hg-nombre">COCINA EQUIPOS</div><div class="hg-prov">DOMA</div></div>
-      <div class="hg-total">$17,313</div>
-      <div class="hg-bar-wrap">
-        <div class="hg-bar-track"><div class="hg-bar-fill done" style="width:100%"></div></div>
+      <div class="hg-left"><div class="hg-nombre">COCINA EQUIPOS</div><div class="hg-prov">DOMA</div></div>
+      <div class="hg-right">
+        <div class="hg-top-row"><span class="hg-total-label">Contratado</span><span class="hg-total">$17,313</span></div>
+        <div class="hg-bar-wrap"><div class="hg-bar-track"><div class="hg-bar-fill done" style="width:100%"></div></div></div>
+        <div class="hg-bottom-row">
+          <div class="hg-pagado-wrap"><span class="hg-pagado-label">Pagado</span><span class="hg-pagado done">$17,313</span></div>
+          <div class="hg-saldo-wrap"><span class="hg-saldo-label">Saldo</span><span class="hg-saldo liq">LIQUIDADO</span></div>
+          <span class="hg-pct done">100%</span>
+        </div>
       </div>
-      <div class="hg-pagado done">$17,313</div>
-      <span class="hg-saldo liq">LIQUIDADO</span>
-      <div class="hg-pct done">100%</div>
     </div>
     <div class="hist-payments">
-      <div class="hist-payment">
-        <div><div class="hp-fecha">↳ &nbsp;11/dic/2025</div><div class="hp-nota">Pago total del pedido</div></div>
-        <div style="text-align:right"><span class="hp-est">Est. #1</span></div>
-        <div></div>
-        <div class="hp-monto ">$17,313</div>
-        <span class="hp-saldo-post liq">✓ Liquidado</span>
-        <div></div>
-      </div>
+      <div class="hist-payment"><div class="hp-left"><span class="hp-fecha">↳ &nbsp;11/dic/2025</span><span class="hp-est">Est. #1</span><span class="hp-nota">Pago total del pedido</span></div><div class="hp-right"><span class="hp-monto ">$17,313</span><span class="hp-saldo-post liq">✓ Liquidado</span></div></div>
     </div>
   </div>
   <div class="hist-group">
     <div class="hist-group-head liquidado">
-      <div><div class="hg-nombre">MÁQUINA HIELOS</div><div class="hg-prov">UNO+UNO</div></div>
-      <div class="hg-total">$6,927</div>
-      <div class="hg-bar-wrap">
-        <div class="hg-bar-track"><div class="hg-bar-fill done" style="width:100%"></div></div>
+      <div class="hg-left"><div class="hg-nombre">MÁQUINA HIELOS</div><div class="hg-prov">UNO+UNO</div></div>
+      <div class="hg-right">
+        <div class="hg-top-row"><span class="hg-total-label">Contratado</span><span class="hg-total">$6,927</span></div>
+        <div class="hg-bar-wrap"><div class="hg-bar-track"><div class="hg-bar-fill done" style="width:100%"></div></div></div>
+        <div class="hg-bottom-row">
+          <div class="hg-pagado-wrap"><span class="hg-pagado-label">Pagado</span><span class="hg-pagado done">$6,927</span></div>
+          <div class="hg-saldo-wrap"><span class="hg-saldo-label">Saldo</span><span class="hg-saldo liq">LIQUIDADO</span></div>
+          <span class="hg-pct done">100%</span>
+        </div>
       </div>
-      <div class="hg-pagado done">$6,927</div>
-      <span class="hg-saldo liq">LIQUIDADO</span>
-      <div class="hg-pct done">100%</div>
     </div>
     <div class="hist-payments">
-      <div class="hist-payment">
-        <div><div class="hp-fecha">↳ &nbsp;11/dic/2025</div><div class="hp-nota">Pago total del pedido</div></div>
-        <div style="text-align:right"><span class="hp-est">Est. #1</span></div>
-        <div></div>
-        <div class="hp-monto ">$6,927</div>
-        <span class="hp-saldo-post liq">✓ Liquidado</span>
-        <div></div>
-      </div>
+      <div class="hist-payment"><div class="hp-left"><span class="hp-fecha">↳ &nbsp;11/dic/2025</span><span class="hp-est">Est. #1</span><span class="hp-nota">Pago total del pedido</span></div><div class="hp-right"><span class="hp-monto ">$6,927</span><span class="hp-saldo-post liq">✓ Liquidado</span></div></div>
     </div>
   </div>
   <div class="hist-group">
     <div class="hist-group-head liquidado">
-      <div><div class="hg-nombre">PIEDRAS NATURALES</div><div class="hg-prov">BLOQUEBE</div></div>
-      <div class="hg-total">$23,261</div>
-      <div class="hg-bar-wrap">
-        <div class="hg-bar-track"><div class="hg-bar-fill done" style="width:100%"></div></div>
+      <div class="hg-left"><div class="hg-nombre">PIEDRAS NATURALES</div><div class="hg-prov">BLOQUEBE</div></div>
+      <div class="hg-right">
+        <div class="hg-top-row"><span class="hg-total-label">Contratado</span><span class="hg-total">$23,261</span></div>
+        <div class="hg-bar-wrap"><div class="hg-bar-track"><div class="hg-bar-fill done" style="width:100%"></div></div></div>
+        <div class="hg-bottom-row">
+          <div class="hg-pagado-wrap"><span class="hg-pagado-label">Pagado</span><span class="hg-pagado done">$23,261</span></div>
+          <div class="hg-saldo-wrap"><span class="hg-saldo-label">Saldo</span><span class="hg-saldo liq">LIQUIDADO</span></div>
+          <span class="hg-pct done">100%</span>
+        </div>
       </div>
-      <div class="hg-pagado done">$23,261</div>
-      <span class="hg-saldo liq">LIQUIDADO</span>
-      <div class="hg-pct done">100%</div>
     </div>
     <div class="hist-payments">
-      <div class="hist-payment">
-        <div><div class="hp-fecha">↳ &nbsp;11/dic/2025</div><div class="hp-nota">Pago total del pedido</div></div>
-        <div style="text-align:right"><span class="hp-est">Est. #1</span></div>
-        <div></div>
-        <div class="hp-monto ">$23,261</div>
-        <span class="hp-saldo-post liq">✓ Liquidado</span>
-        <div></div>
-      </div>
+      <div class="hist-payment"><div class="hp-left"><span class="hp-fecha">↳ &nbsp;11/dic/2025</span><span class="hp-est">Est. #1</span><span class="hp-nota">Pago total del pedido</span></div><div class="hp-right"><span class="hp-monto ">$23,261</span><span class="hp-saldo-post liq">✓ Liquidado</span></div></div>
     </div>
   </div>
   <div class="hist-group">
     <div class="hist-group-head liquidado">
-      <div><div class="hg-nombre">GRIFERÍAS BAR</div><div class="hg-prov">ARTEXA</div></div>
-      <div class="hg-total">$1,824</div>
-      <div class="hg-bar-wrap">
-        <div class="hg-bar-track"><div class="hg-bar-fill done" style="width:100%"></div></div>
+      <div class="hg-left"><div class="hg-nombre">GRIFERÍAS BAR</div><div class="hg-prov">ARTEXA</div></div>
+      <div class="hg-right">
+        <div class="hg-top-row"><span class="hg-total-label">Contratado</span><span class="hg-total">$1,824</span></div>
+        <div class="hg-bar-wrap"><div class="hg-bar-track"><div class="hg-bar-fill done" style="width:100%"></div></div></div>
+        <div class="hg-bottom-row">
+          <div class="hg-pagado-wrap"><span class="hg-pagado-label">Pagado</span><span class="hg-pagado done">$1,824</span></div>
+          <div class="hg-saldo-wrap"><span class="hg-saldo-label">Saldo</span><span class="hg-saldo liq">LIQUIDADO</span></div>
+          <span class="hg-pct done">100%</span>
+        </div>
       </div>
-      <div class="hg-pagado done">$1,824</div>
-      <span class="hg-saldo liq">LIQUIDADO</span>
-      <div class="hg-pct done">100%</div>
     </div>
     <div class="hist-payments">
-      <div class="hist-payment">
-        <div><div class="hp-fecha">↳ &nbsp;11/dic/2025</div><div class="hp-nota">Pago total del pedido</div></div>
-        <div style="text-align:right"><span class="hp-est">Est. #1</span></div>
-        <div></div>
-        <div class="hp-monto ">$1,824</div>
-        <span class="hp-saldo-post liq">✓ Liquidado</span>
-        <div></div>
-      </div>
+      <div class="hist-payment"><div class="hp-left"><span class="hp-fecha">↳ &nbsp;11/dic/2025</span><span class="hp-est">Est. #1</span><span class="hp-nota">Pago total del pedido</span></div><div class="hp-right"><span class="hp-monto ">$1,824</span><span class="hp-saldo-post liq">✓ Liquidado</span></div></div>
     </div>
   </div>
   <div class="hist-group">
     <div class="hist-group-head liquidado">
-      <div><div class="hg-nombre">DECORACIÓN IMP.</div><div class="hg-prov">PROV. INDIVIDUAL</div></div>
-      <div class="hg-total">$11,497</div>
-      <div class="hg-bar-wrap">
-        <div class="hg-bar-track"><div class="hg-bar-fill done" style="width:100%"></div></div>
+      <div class="hg-left"><div class="hg-nombre">DECORACIÓN IMP.</div><div class="hg-prov">PROV. INDIVIDUAL</div></div>
+      <div class="hg-right">
+        <div class="hg-top-row"><span class="hg-total-label">Contratado</span><span class="hg-total">$11,497</span></div>
+        <div class="hg-bar-wrap"><div class="hg-bar-track"><div class="hg-bar-fill done" style="width:100%"></div></div></div>
+        <div class="hg-bottom-row">
+          <div class="hg-pagado-wrap"><span class="hg-pagado-label">Pagado</span><span class="hg-pagado done">$11,497</span></div>
+          <div class="hg-saldo-wrap"><span class="hg-saldo-label">Saldo</span><span class="hg-saldo liq">LIQUIDADO</span></div>
+          <span class="hg-pct done">100%</span>
+        </div>
       </div>
-      <div class="hg-pagado done">$11,497</div>
-      <span class="hg-saldo liq">LIQUIDADO</span>
-      <div class="hg-pct done">100%</div>
     </div>
     <div class="hist-payments">
-      <div class="hist-payment">
-        <div><div class="hp-fecha">↳ &nbsp;09/ene/2026</div><div class="hp-nota">Pago total del pedido</div></div>
-        <div style="text-align:right"><span class="hp-est">Est. #3</span></div>
-        <div></div>
-        <div class="hp-monto ">$10,300</div>
-        <span class="hp-saldo-post">$1,197</span>
-        <div></div>
-      </div>
-      <div class="hist-payment">
-        <div><div class="hp-fecha">↳ &nbsp;14/ene/2026</div><div class="hp-nota">Pago total del pedido</div></div>
-        <div style="text-align:right"><span class="hp-est">Est. #4</span></div>
-        <div></div>
-        <div class="hp-monto ">$1,197</div>
-        <span class="hp-saldo-post liq">✓ Liquidado</span>
-        <div></div>
-      </div>
+      <div class="hist-payment"><div class="hp-left"><span class="hp-fecha">↳ &nbsp;09/ene/2026</span><span class="hp-est">Est. #3</span><span class="hp-nota">Pago total del pedido</span></div><div class="hp-right"><span class="hp-monto ">$10,300</span><span class="hp-saldo-post">$1,197</span></div></div>
+      <div class="hist-payment"><div class="hp-left"><span class="hp-fecha">↳ &nbsp;14/ene/2026</span><span class="hp-est">Est. #4</span><span class="hp-nota">Pago total del pedido</span></div><div class="hp-right"><span class="hp-monto ">$1,197</span><span class="hp-saldo-post liq">✓ Liquidado</span></div></div>
     </div>
   </div>
   <div class="hist-group">
     <div class="hist-group-head liquidado">
-      <div><div class="hg-nombre">PO BOX</div><div class="hg-prov">UNO+UNO</div></div>
-      <div class="hg-total">$1,262</div>
-      <div class="hg-bar-wrap">
-        <div class="hg-bar-track"><div class="hg-bar-fill done" style="width:100%"></div></div>
+      <div class="hg-left"><div class="hg-nombre">PO BOX</div><div class="hg-prov">UNO+UNO</div></div>
+      <div class="hg-right">
+        <div class="hg-top-row"><span class="hg-total-label">Contratado</span><span class="hg-total">$1,262</span></div>
+        <div class="hg-bar-wrap"><div class="hg-bar-track"><div class="hg-bar-fill done" style="width:100%"></div></div></div>
+        <div class="hg-bottom-row">
+          <div class="hg-pagado-wrap"><span class="hg-pagado-label">Pagado</span><span class="hg-pagado done">$1,262</span></div>
+          <div class="hg-saldo-wrap"><span class="hg-saldo-label">Saldo</span><span class="hg-saldo liq">LIQUIDADO</span></div>
+          <span class="hg-pct done">100%</span>
+        </div>
       </div>
-      <div class="hg-pagado done">$1,262</div>
-      <span class="hg-saldo liq">LIQUIDADO</span>
-      <div class="hg-pct done">100%</div>
     </div>
     <div class="hist-payments">
-      <div class="hist-payment">
-        <div><div class="hp-fecha">↳ &nbsp;17/feb/2026</div><div class="hp-nota">Finiquito papel tapiz</div></div>
-        <div style="text-align:right"><span class="hp-est">Est. #6</span></div>
-        <div></div>
-        <div class="hp-monto ">$1,093</div>
-        <span class="hp-saldo-post">$169</span>
-        <div></div>
-      </div>
-      <div class="hist-payment">
-        <div><div class="hp-fecha">↳ &nbsp;25/mar/2026</div><div class="hp-nota">Finiquito papel tapiz</div></div>
-        <div style="text-align:right"><span class="hp-est">Est. #8</span></div>
-        <div></div>
-        <div class="hp-monto ">$169</div>
-        <span class="hp-saldo-post liq">✓ Liquidado</span>
-        <div></div>
-      </div>
+      <div class="hist-payment"><div class="hp-left"><span class="hp-fecha">↳ &nbsp;17/feb/2026</span><span class="hp-est">Est. #6</span><span class="hp-nota">Finiquito papel tapiz</span></div><div class="hp-right"><span class="hp-monto ">$1,093</span><span class="hp-saldo-post">$169</span></div></div>
+      <div class="hist-payment"><div class="hp-left"><span class="hp-fecha">↳ &nbsp;25/mar/2026</span><span class="hp-est">Est. #8</span><span class="hp-nota">Finiquito papel tapiz</span></div><div class="hp-right"><span class="hp-monto ">$169</span><span class="hp-saldo-post liq">✓ Liquidado</span></div></div>
     </div>
   </div>
   <div class="hist-group">
     <div class="hist-group-head ">
-      <div><div class="hg-nombre">AUDIO Y VIDEO</div><div class="hg-prov">AUVIT</div></div>
-      <div class="hg-total">$238,003</div>
-      <div class="hg-bar-wrap">
-        <div class="hg-bar-track"><div class="hg-bar-fill " style="width:60%"></div></div>
+      <div class="hg-left"><div class="hg-nombre">AUDIO Y VIDEO</div><div class="hg-prov">AUVIT</div></div>
+      <div class="hg-right">
+        <div class="hg-top-row"><span class="hg-total-label">Contratado</span><span class="hg-total">$238,003</span></div>
+        <div class="hg-bar-wrap"><div class="hg-bar-track"><div class="hg-bar-fill " style="width:60%"></div></div></div>
+        <div class="hg-bottom-row">
+          <div class="hg-pagado-wrap"><span class="hg-pagado-label">Pagado</span><span class="hg-pagado ">$142,802</span></div>
+          <div class="hg-saldo-wrap"><span class="hg-saldo-label">Saldo</span><span class="hg-saldo due">$95,201</span></div>
+          <span class="hg-pct ">60%</span>
+        </div>
       </div>
-      <div class="hg-pagado ">$142,802</div>
-      <span class="hg-saldo due">$95,201</span>
-      <div class="hg-pct ">60%</div>
     </div>
     <div class="hist-payments">
-      <div class="hist-payment">
-        <div><div class="hp-fecha">↳ &nbsp;11/dic/2025</div><div class="hp-nota">Anticipo para equipos e instalaciones</div></div>
-        <div style="text-align:right"><span class="hp-est">Est. #1</span></div>
-        <div></div>
-        <div class="hp-monto ">$142,802</div>
-        <span class="hp-saldo-post">$95,201</span>
-        <div></div>
-      </div>
+      <div class="hist-payment"><div class="hp-left"><span class="hp-fecha">↳ &nbsp;11/dic/2025</span><span class="hp-est">Est. #1</span><span class="hp-nota">Anticipo para equipos e instalaciones</span></div><div class="hp-right"><span class="hp-monto ">$142,802</span><span class="hp-saldo-post">$95,201</span></div></div>
     </div>
   </div>
   <div class="hist-group">
     <div class="hist-group-head ">
-      <div><div class="hg-nombre">INTERIORISMO USD</div><div class="hg-prov">UNO+UNO</div></div>
-      <div class="hg-total">$31,764</div>
-      <div class="hg-bar-wrap">
-        <div class="hg-bar-track"><div class="hg-bar-fill " style="width:94%"></div></div>
+      <div class="hg-left"><div class="hg-nombre">INTERIORISMO USD</div><div class="hg-prov">UNO+UNO</div></div>
+      <div class="hg-right">
+        <div class="hg-top-row"><span class="hg-total-label">Contratado</span><span class="hg-total">$31,764</span></div>
+        <div class="hg-bar-wrap"><div class="hg-bar-track"><div class="hg-bar-fill " style="width:94%"></div></div></div>
+        <div class="hg-bottom-row">
+          <div class="hg-pagado-wrap"><span class="hg-pagado-label">Pagado</span><span class="hg-pagado ">$29,851</span></div>
+          <div class="hg-saldo-wrap"><span class="hg-saldo-label">Saldo</span><span class="hg-saldo due">$1,912</span></div>
+          <span class="hg-pct ">94%</span>
+        </div>
       </div>
-      <div class="hg-pagado ">$29,851</div>
-      <span class="hg-saldo due">$1,912</span>
-      <div class="hg-pct ">94%</div>
     </div>
     <div class="hist-payments">
-      <div class="hist-payment">
-        <div><div class="hp-fecha">↳ &nbsp;11/dic/2025</div><div class="hp-nota">Anticipo pedidos y servicios interiorismo</div></div>
-        <div style="text-align:right"><span class="hp-est">Est. #1</span></div>
-        <div></div>
-        <div class="hp-monto ">$27,040</div>
-        <span class="hp-saldo-post">$4,724</span>
-        <div></div>
-      </div>
-      <div class="hist-payment">
-        <div><div class="hp-fecha">↳ &nbsp;05/may/2026</div><div class="hp-nota">Avance pedidos y servicios interiorismo</div></div>
-        <div style="text-align:right"><span class="hp-est">Est. #11</span></div>
-        <div></div>
-        <div class="hp-monto ">$2,812</div>
-        <span class="hp-saldo-post">$1,912</span>
-        <div></div>
-      </div>
+      <div class="hist-payment"><div class="hp-left"><span class="hp-fecha">↳ &nbsp;11/dic/2025</span><span class="hp-est">Est. #1</span><span class="hp-nota">Anticipo pedidos y servicios interiorismo</span></div><div class="hp-right"><span class="hp-monto ">$27,040</span><span class="hp-saldo-post">$4,724</span></div></div>
+      <div class="hist-payment"><div class="hp-left"><span class="hp-fecha">↳ &nbsp;05/may/2026</span><span class="hp-est">Est. #11</span><span class="hp-nota">Avance pedidos y servicios interiorismo</span></div><div class="hp-right"><span class="hp-monto ">$2,812</span><span class="hp-saldo-post">$1,912</span></div></div>
     </div>
   </div>
   <div class="hist-group">
     <div class="hist-group-head ">
-      <div><div class="hg-nombre">LUMINARIAS</div><div class="hg-prov">BULBO</div></div>
-      <div class="hg-total">$34,679</div>
-      <div class="hg-bar-wrap">
-        <div class="hg-bar-track"><div class="hg-bar-fill " style="width:91%"></div></div>
+      <div class="hg-left"><div class="hg-nombre">LUMINARIAS</div><div class="hg-prov">BULBO</div></div>
+      <div class="hg-right">
+        <div class="hg-top-row"><span class="hg-total-label">Contratado</span><span class="hg-total">$34,679</span></div>
+        <div class="hg-bar-wrap"><div class="hg-bar-track"><div class="hg-bar-fill " style="width:91%"></div></div></div>
+        <div class="hg-bottom-row">
+          <div class="hg-pagado-wrap"><span class="hg-pagado-label">Pagado</span><span class="hg-pagado ">$31,399</span></div>
+          <div class="hg-saldo-wrap"><span class="hg-saldo-label">Saldo</span><span class="hg-saldo due">$3,280</span></div>
+          <span class="hg-pct ">91%</span>
+        </div>
       </div>
-      <div class="hg-pagado ">$31,399</div>
-      <span class="hg-saldo due">$3,280</span>
-      <div class="hg-pct ">91%</div>
     </div>
     <div class="hist-payments">
-      <div class="hist-payment">
-        <div><div class="hp-fecha">↳ &nbsp;11/dic/2025</div><div class="hp-nota">Anticipo para colocar pedido. TC 18.55</div></div>
-        <div style="text-align:right"><span class="hp-est">Est. #1</span></div>
-        <div></div>
-        <div class="hp-monto ">$17,340</div>
-        <span class="hp-saldo-post">$17,340</span>
-        <div></div>
-      </div>
-      <div class="hist-payment">
-        <div><div class="hp-fecha">↳ &nbsp;05/may/2026</div><div class="hp-nota">Recepción de luminarias. TC 18.55</div></div>
-        <div style="text-align:right"><span class="hp-est">Est. #11</span></div>
-        <div></div>
-        <div class="hp-monto ">$14,059</div>
-        <span class="hp-saldo-post">$3,280</span>
-        <div></div>
-      </div>
+      <div class="hist-payment"><div class="hp-left"><span class="hp-fecha">↳ &nbsp;11/dic/2025</span><span class="hp-est">Est. #1</span><span class="hp-nota">Anticipo para colocar pedido. TC 18.55</span></div><div class="hp-right"><span class="hp-monto ">$17,340</span><span class="hp-saldo-post">$17,340</span></div></div>
+      <div class="hist-payment"><div class="hp-left"><span class="hp-fecha">↳ &nbsp;05/may/2026</span><span class="hp-est">Est. #11</span><span class="hp-nota">Recepción de luminarias. TC 18.55</span></div><div class="hp-right"><span class="hp-monto ">$14,059</span><span class="hp-saldo-post">$3,280</span></div></div>
     </div>
   </div>
   <div class="hist-group">
     <div class="hist-group-head ">
-      <div><div class="hg-nombre">ELECTRODOMÉSTICOS</div><div class="hg-prov">ALBERÓ</div></div>
-      <div class="hg-total">$41,877</div>
-      <div class="hg-bar-wrap">
-        <div class="hg-bar-track"><div class="hg-bar-fill " style="width:85%"></div></div>
+      <div class="hg-left"><div class="hg-nombre">ELECTRODOMÉSTICOS</div><div class="hg-prov">ALBERÓ</div></div>
+      <div class="hg-right">
+        <div class="hg-top-row"><span class="hg-total-label">Contratado</span><span class="hg-total">$41,877</span></div>
+        <div class="hg-bar-wrap"><div class="hg-bar-track"><div class="hg-bar-fill " style="width:85%"></div></div></div>
+        <div class="hg-bottom-row">
+          <div class="hg-pagado-wrap"><span class="hg-pagado-label">Pagado</span><span class="hg-pagado ">$35,596</span></div>
+          <div class="hg-saldo-wrap"><span class="hg-saldo-label">Saldo</span><span class="hg-saldo due">$6,282</span></div>
+          <span class="hg-pct ">85%</span>
+        </div>
       </div>
-      <div class="hg-pagado ">$35,596</div>
-      <span class="hg-saldo due">$6,282</span>
-      <div class="hg-pct ">85%</div>
     </div>
     <div class="hist-payments">
-      <div class="hist-payment">
-        <div><div class="hp-fecha">↳ &nbsp;11/dic/2025</div><div class="hp-nota">Anticipo para colocar pedido. TC 18.21</div></div>
-        <div style="text-align:right"><span class="hp-est">Est. #1</span></div>
-        <div></div>
-        <div class="hp-monto ">$35,596</div>
-        <span class="hp-saldo-post">$6,282</span>
-        <div></div>
-      </div>
+      <div class="hist-payment"><div class="hp-left"><span class="hp-fecha">↳ &nbsp;11/dic/2025</span><span class="hp-est">Est. #1</span><span class="hp-nota">Anticipo para colocar pedido. TC 18.21</span></div><div class="hp-right"><span class="hp-monto ">$35,596</span><span class="hp-saldo-post">$6,282</span></div></div>
     </div>
   </div>
   <div class="hist-group">
     <div class="hist-group-head liquidado">
-      <div><div class="hg-nombre">MOBILIARIO IMP.</div><div class="hg-prov">COMERCIALIZADORA</div></div>
-      <div class="hg-total">$20,834</div>
-      <div class="hg-bar-wrap">
-        <div class="hg-bar-track"><div class="hg-bar-fill done" style="width:100%"></div></div>
+      <div class="hg-left"><div class="hg-nombre">MOBILIARIO IMP.</div><div class="hg-prov">COMERCIALIZADORA</div></div>
+      <div class="hg-right">
+        <div class="hg-top-row"><span class="hg-total-label">Contratado</span><span class="hg-total">$20,834</span></div>
+        <div class="hg-bar-wrap"><div class="hg-bar-track"><div class="hg-bar-fill done" style="width:100%"></div></div></div>
+        <div class="hg-bottom-row">
+          <div class="hg-pagado-wrap"><span class="hg-pagado-label">Pagado</span><span class="hg-pagado done">$20,834</span></div>
+          <div class="hg-saldo-wrap"><span class="hg-saldo-label">Saldo</span><span class="hg-saldo liq">LIQUIDADO</span></div>
+          <span class="hg-pct done">100%</span>
+        </div>
       </div>
-      <div class="hg-pagado done">$20,834</div>
-      <span class="hg-saldo liq">LIQUIDADO</span>
-      <div class="hg-pct done">100%</div>
     </div>
     <div class="hist-payments">
-      <div class="hist-payment">
-        <div><div class="hp-fecha">↳ &nbsp;11/dic/2025</div><div class="hp-nota">Anticipo para colocar pedido</div></div>
-        <div style="text-align:right"><span class="hp-est">Est. #1</span></div>
-        <div></div>
-        <div class="hp-monto ">$1,000</div>
-        <span class="hp-saldo-post">$19,834</span>
-        <div></div>
-      </div>
-      <div class="hist-payment">
-        <div><div class="hp-fecha">↳ &nbsp;09/ene/2026</div><div class="hp-nota">Anticipo para colocar pedido. TC 18.21</div></div>
-        <div style="text-align:right"><span class="hp-est">Est. #3</span></div>
-        <div></div>
-        <div class="hp-monto ">$19,834</div>
-        <span class="hp-saldo-post liq">✓ Liquidado</span>
-        <div></div>
-      </div>
+      <div class="hist-payment"><div class="hp-left"><span class="hp-fecha">↳ &nbsp;11/dic/2025</span><span class="hp-est">Est. #1</span><span class="hp-nota">Anticipo para colocar pedido</span></div><div class="hp-right"><span class="hp-monto ">$1,000</span><span class="hp-saldo-post">$19,834</span></div></div>
+      <div class="hist-payment"><div class="hp-left"><span class="hp-fecha">↳ &nbsp;09/ene/2026</span><span class="hp-est">Est. #3</span><span class="hp-nota">Anticipo para colocar pedido. TC 18.21</span></div><div class="hp-right"><span class="hp-monto ">$19,834</span><span class="hp-saldo-post liq">✓ Liquidado</span></div></div>
     </div>
   </div>
   <div class="hist-group">
     <div class="hist-group-head pendiente">
-      <div><div class="hg-nombre">IMPORTACIÓN USD</div><div class="hg-prov">COMERCIALIZADORA</div><div style="font-size:8px;color:#B3A693;font-style:italic;margin-top:2px">Pendiente de definir</div></div>
-      <div class="hg-total">—</div>
-      <div class="hg-bar-wrap">
-        <div class="hg-bar-track"><div class="hg-bar-fill " style="width:0%"></div></div>
+      <div class="hg-left"><div class="hg-nombre">IMPORTACIÓN USD</div><div class="hg-prov">COMERCIALIZADORA</div><div class="hg-nota">Pendiente de definir</div></div>
+      <div class="hg-right">
+        <div class="hg-top-row"><span class="hg-total-label">Contratado</span><span class="hg-total">—</span></div>
+        <div class="hg-bar-wrap"><div class="hg-bar-track"><div class="hg-bar-fill " style="width:0%"></div></div></div>
+        <div class="hg-bottom-row">
+          <div class="hg-pagado-wrap"><span class="hg-pagado-label">Pagado</span><span class="hg-pagado ">—</span></div>
+          <div class="hg-saldo-wrap"><span class="hg-saldo-label">Saldo</span><span class="hg-saldo pend">Pendiente</span></div>
+          <span class="hg-pct pend">0%</span>
+        </div>
       </div>
-      <div class="hg-pagado ">—</div>
-      <span class="hg-saldo pend">Pendiente</span>
-      <div class="hg-pct pend">0%</div>
     </div>
     <div class="hist-nopagos">Sin pagos registrados — pendiente de iniciar</div>
   </div>
 
-  <div class="page-footer" style="padding:14px 0 0;margin-top:16px">
-    <div class="fx-text">TC aplicado: MXN $18.55 / USD &nbsp;·&nbsp; TC pagado: MXN $18.21 / USD</div>
-  </div>
 </div>
 
 <div class="page-footer">
-  <div class="fx-text">
-    Tipo de cambio aplicado: MXN $18.55 / USD &nbsp;·&nbsp; Tipo de cambio pagado: MXN $18.21 / USD
-  </div>
+  <div class="fx-text">TC aplicado: MXN $18.55 / USD &nbsp;·&nbsp; TC pagado: MXN $18.21 / USD</div>
   <div class="footer-brand">UNO + UNO · Taller</div>
 </div>
 
 <script>
 function showTab(id, el) {
-  document.querySelectorAll('.section, #estimacion').forEach(s => {
-    s.style.display = 'none';
-    s.classList.remove('active');
+  ['estimacion','histMXN','histUSD'].forEach(s => {
+    const el2 = document.getElementById(s);
+    el2.style.display = 'none';
+    el2.classList.remove('active');
   });
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   const target = document.getElementById(id);
